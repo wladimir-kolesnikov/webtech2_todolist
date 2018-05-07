@@ -1,3 +1,14 @@
+Was ich (bisher) benutzt habe:
+
+- Apache Tomcat 9 als Server für Eclipse
+- Hibernate für JPA Management
+- Jersey für JAX-RS Implementation
+- JDBC als MySQL Driver
+- MySQL 5 Datenbank
+- Xampp für MySQL Datenbank bzw. Apache Server (benötigt für PhpMyAdmin)
+
+
+
 Packages:
 
 -----DAO-----
