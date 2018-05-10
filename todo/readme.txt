@@ -20,4 +20,4 @@ Werden mit Hilfe von JPA in der Datenbank verwaltet
 
 
 -----Resource-----
-Später wichtig fürs Frontend. Braucht man in Verbindung mit Servlets
+Später wichtig fürs Frontend. Braucht man in Verbindung mit REST Api

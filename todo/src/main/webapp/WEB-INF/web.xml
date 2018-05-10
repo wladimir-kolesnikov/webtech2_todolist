@@ -15,4 +15,11 @@
         <servlet-name>Jersey Web Application</servlet-name>
         <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
+    
+    <!-- Listener für den Start des Servers (Init.java wird ausgeführt)
+    	zum Initialisieren von Objekten-->
+     <listener>
+		<listener-class>de.wt2.todo.database.Init</listener-class>
+   </listener>
+   
 </web-app>

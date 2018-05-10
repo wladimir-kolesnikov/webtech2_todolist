@@ -14,20 +14,26 @@ public abstract class BaseDAO<T> {
 	 */
 	
     @PersistenceContext
-    private EntityManager entityManager;
+    protected EntityManager entityManager;
     
     protected abstract Set<T> getAll();
     protected abstract T findById(long id);
     
     protected void create(T t) {
+    	entityManager.getTransaction().begin();
     	entityManager.persist(t);
+    	entityManager.getTransaction().commit();
     }
     
     protected void update(T t) {
+    	entityManager.getTransaction().begin();
     	entityManager.merge(t);
+    	entityManager.getTransaction().commit();
     }
     
     protected void delete(T t) {
+    	entityManager.getTransaction().begin();
     	entityManager.remove(t);
+    	entityManager.getTransaction().commit();
     }
 }
