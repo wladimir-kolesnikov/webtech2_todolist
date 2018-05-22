@@ -1,7 +1,6 @@
 package de.wt2.todo.entity;
 
 import java.util.Date;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +15,7 @@ public class User extends BaseEntity {
 	private Date joined;
 	
 	// Relationship (manytomany? fetchtype eager oder lazy?)
-	private Set<Role> roles;
+//	private Set<Role> roles;
 
 	private static final long serialVersionUID = -1938877027229076760L;
 
@@ -36,11 +35,11 @@ public class User extends BaseEntity {
 		this.joined = joined;
 	}
 
-	public Set<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
-	}
+//	public Set<Role> getRoles() {
+//		return roles;
+//	}
+//
+//	public void setRoles(Set<Role> roles) {
+//		this.roles = roles;
+//	}
 }

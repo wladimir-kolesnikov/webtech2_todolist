@@ -1,7 +1,5 @@
 package de.wt2.todo.entity;
 
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -17,7 +15,7 @@ public class Permission extends BaseEntity {
 	
 	
 	// Relationship und fetchtype ergänzen
-	private Set<Role> roles;
+//	private Set<Role> roles;
 
 	public String getPermissionName() {
 		return permissionName;
@@ -27,12 +25,11 @@ public class Permission extends BaseEntity {
 		this.permissionName = permissionName;
 	}
 
-	public Set<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
-	}
-
+//	public Set<Role> getRoles() {
+//		return roles;
+//	}
+//
+//	public void setRoles(Set<Role> roles) {
+//		this.roles = roles;
+//	}
 }

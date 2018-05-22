@@ -4,15 +4,15 @@
              version="2.0">
              
    <persistence-unit name="de.wt2.todo">
-      <provider>org.hibernate.ejb.HibernatePersistence</provider>
-      <jta-data-source>jdbc/todo</jta-data-source>
-      <properties> 
-      	<property name="javax.persistence.jdbc.user" value="root"/>
-        <property name="javax.persistence.jdbc.password" value=""/>
-		<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/todo?useLegacyDatetimeCode=false&amp;serverTimezone=UTC"/>
-       	<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-       
-        <property name="hibernate.hbm2ddl.auto" value="update"/>
-      </properties>
+       	<jta-data-source>java:jboss/datasources/TodoDS</jta-data-source>     
+		<properties>
+	      	<property name="javax.persistence.jdbc.user" value="root"/>
+	        <property name="javax.persistence.jdbc.password" value="root"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:todo"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+			<property name="hibernate.format_sql" value="true"/>
+			<property name="hibernate.show_sql" value="true"/>
+		</properties>
    </persistence-unit> 
 </persistence>	

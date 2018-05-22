@@ -8,8 +8,20 @@
     <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <name>todo</name>
+    
+     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <wildfly-swarm.version>2018.4.1</wildfly-swarm.version>
+        <h2.path>${env.HOME}/todo</h2.path>
+        <wildfly.path>${env.HOME}/wildfly-12.0.0.Final</wildfly.path>
+    </properties>
+    
 	
-    <build>
+<!--     <build>
         <finalName>todo</finalName>
         <plugins>
             <plugin>
@@ -23,83 +35,42 @@
                 </configuration>
             </plugin>
         </plugins>
-    </build>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.glassfish.jersey</groupId>
-                <artifactId>jersey-bom</artifactId>
-                <version>${jersey.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-		
-        </dependencies>
-    </dependencyManagement>
+    </build> -->
     
-    <dependencies>
-		<dependency>
-		    <groupId>org.glassfish.jersey.containers</groupId>
-		    <artifactId>jersey-container-servlet</artifactId>
-		</dependency>
-
-		<dependency>
-	    	<groupId>javax.servlet</groupId>
-	    	<artifactId>javax.servlet-api</artifactId>
-	    	<version>4.0.0</version>
-	    	<scope>provided</scope>
-		</dependency>
-		
+    <dependencies>		
 		 <dependency>
-            <groupId>org.glassfish.jersey.inject</groupId>
-            <artifactId>jersey-hk2</artifactId>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>8.0</version>
+            <scope>provided</scope>
         </dependency>
-        
-		<dependency>
-		    <groupId>org.glassfish.jersey.media</groupId>
-		    <artifactId>jersey-media-json-jackson</artifactId>
-		</dependency>
         
 		<dependency>
 		    <groupId>org.hibernate</groupId>
 		    <artifactId>hibernate-core</artifactId>
-		    <version>5.3.0.CR2</version>
+		    <version>5.3.0.Final</version>
+		    <scope>provided</scope>
 		</dependency>
 
 		<dependency>
-		    <groupId>mysql</groupId>
-		    <artifactId>mysql-connector-java</artifactId>
-		    <version>8.0.8-dmr</version>
+		    <groupId>com.h2database</groupId>
+		    <artifactId>h2</artifactId>
+		    <version>1.4.197</version>
+		    <scope>test</scope>
 		</dependency>
 		
 		<dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-core</artifactId>
-            <version>1.4.0</version>
-        </dependency>
-        
-       <dependency>
-		    <groupId>org.apache.shiro</groupId>
-		    <artifactId>shiro-aspectj</artifactId>
-		    <version>1.4.0</version>
-		</dependency>
-        
-		<dependency>
-		    <groupId>org.apache.shiro</groupId>
-		    <artifactId>shiro-web</artifactId>
-		    <version>1.4.0</version>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>javax.servlet-api</artifactId>
+		    <version>4.0.1</version>
+		    <scope>provided</scope>
 		</dependency>
 		
 		<dependency>
-	    	<groupId>javax.servlet</groupId>
-	   	 	<artifactId>jstl</artifactId>
-	    	<version>1.2</version>
+		    <groupId>javax.persistence</groupId>
+		    <artifactId>persistence-api</artifactId>
+		    <version>1.0.2</version>
 		</dependency>
+	
     </dependencies>
-
-    <properties>
-        <jersey.version>2.26</jersey.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
 </project>
