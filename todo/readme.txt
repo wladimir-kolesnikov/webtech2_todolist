@@ -1,18 +1,15 @@
 Was ich (bisher) benutzt habe:
 
-- Apache Tomcat 9 als Server für Eclipse
+- (Apache Tomcat 9 --- geändert) Wildfly als Server für Eclipse (siehe unten)
 - Hibernate für JPA Management
-- Jersey für JAX-RS Implementation
-- JDBC als MySQL Driver
-- MySQL 5 Datenbank
-- Xampp für MySQL Datenbank bzw. Apache Server (benötigt für PhpMyAdmin)
-
+- (Jersey für JAX-RS Implementation) -- Erstmal entfernt
+- JDBC H2 als Driver
+- (MySQL 5 Datenbank) -- Geändert zu H2 wie in den Beispielen
 
 
 Packages:
-
------DAO-----
-Gelten als Schnittstelle zwischen App und Datenbank (CRUD)
+-----Conf-----
+Für die Konfiguration, beispielsweise Application Path setzen, oder Startup Bean zum befüllen der Datenbank zum Testen
 
 
 -----Entity-----
@@ -20,4 +17,10 @@ Werden mit Hilfe von JPA in der Datenbank verwaltet
 
 
 -----Resource-----
-Später wichtig fürs Frontend. Braucht man in Verbindung mit REST Api
+Braucht man in Verbindung mit REST Api
+
+
+
+-----Sonstiges-----
+Datasource muss im Wildfly Server konfiguriert werden unter Configuration / Subsystems / Datasources / Non-XA
+Wird nirgendwo auf den Folien erklärt.
