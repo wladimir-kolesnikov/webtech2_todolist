@@ -4,13 +4,13 @@
              version="2.0">
              
    <persistence-unit name="de.wt2.todo">
-       	<jta-data-source>java:jboss/datasources/TodoDS</jta-data-source>     
+       	<jta-data-source>java:jboss/datasources/TodoMysqlDS</jta-data-source>     
 		<properties>
 	      	<property name="javax.persistence.jdbc.user" value="root"/>
-	        <property name="javax.persistence.jdbc.password" value="root"/>
-			<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:todo"/>
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
-			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+<!-- 	        <property name="javax.persistence.jdbc.password" value="root"/>-->			
+			<property name="javax.persistence.jdbc.url" value="java:jboss/datasources/TodoMysqlDS"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
 			<property name="hibernate.format_sql" value="true"/>
 			<property name="hibernate.show_sql" value="true"/>
 		</properties>

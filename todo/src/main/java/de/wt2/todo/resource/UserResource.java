@@ -1,11 +1,13 @@
 package de.wt2.todo.resource;
 
 
-import java.util.Set;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaQuery;
 import javax.transaction.Transactional;
 import javax.ws.rs.Path;
 
@@ -20,14 +22,16 @@ public class UserResource extends BaseResource<User> {
 	private EntityManager entityManager;
 	
 
-	public User get(long id) {
+	public User find(long id) {
 		return entityManager.find(User.class, id);
 	}
 
 	@Override
-	public Set<User> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<User> findAll() {
+		CriteriaQuery query = entityManager.getCriteriaBuilder().createQuery();
+		query.select(query.from(User.class));
+		
+		Query q = entityManager.createQuery(query);
+		return q.getResultList();
 	}
-
 }

@@ -1,6 +1,6 @@
 package de.wt2.todo.resource;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -22,10 +22,11 @@ public abstract class BaseResource<T> {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public abstract T get(@PathParam("id") long id);
+	public abstract T find(@PathParam("id") long id);
 	
 	@GET
-	public abstract Set<T> getAll();
+	@Produces(MediaType.APPLICATION_JSON)
+	public abstract List<T> findAll();
 	
 	
 	/*

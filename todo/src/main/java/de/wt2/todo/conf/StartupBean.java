@@ -8,11 +8,13 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
 import de.wt2.todo.entity.User;
 
 @Singleton
 @Startup
+@Transactional
 public class StartupBean {
 	
 	@PersistenceContext
