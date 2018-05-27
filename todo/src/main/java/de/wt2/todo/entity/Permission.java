@@ -15,9 +15,11 @@ public class Permission extends BaseEntity {
 	private static final long serialVersionUID = -1572920557494497733L;
 
 	@Column(name="permission_name")
+	// Permission name, z.B. "EDIT, DELETE.." usw.
 	private String permissionName;
 	
 	@ManyToMany(fetch=FetchType.LAZY,  mappedBy="permissions")
+	// Die den Permissions zugeteilten roles. Mehrere Permissions können mehreren Roles zugeteilt sein
 	private Set<Role> roles;
 
 	public String getPermissionName() {
@@ -34,5 +36,9 @@ public class Permission extends BaseEntity {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 }

@@ -9,14 +9,20 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity(name="user")
 @Table(name="user")
 public class User extends BaseEntity {
 
+	private static final long serialVersionUID = -1938877027229076760L;
+
 	@Column(unique=true)
+	// Der username des Users
 	private String username;
+	
+	// Registrierungsdatum
 	private Date joined;
 	
 	@ManyToMany(fetch=FetchType.LAZY)
@@ -25,9 +31,13 @@ public class User extends BaseEntity {
 			joinColumns= {@JoinColumn(name="user_name", referencedColumnName="username")},
 			inverseJoinColumns = {@JoinColumn(name="role_id", referencedColumnName="id")}	
 	)
+	// Set von Roles, die dem User zugeordnet sind (z.B. Admin, S-Mod, Guest usw.)
 	private Set<Role> roles;
+	
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="author")
+	// Alle Notes, die von dem User erstellt wurden
+	private Set<Note> notes;
 
-	private static final long serialVersionUID = -1938877027229076760L;
 
 	public String getUsername() {
 		return username;
@@ -51,5 +61,17 @@ public class User extends BaseEntity {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+
+	public Set<Note> getNotes() {
+		return notes;
+	}
+
+	public void setNotes(Set<Note> notes) {
+		this.notes = notes;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 }
