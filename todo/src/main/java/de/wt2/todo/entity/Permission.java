@@ -18,7 +18,7 @@ public class Permission extends BaseEntity {
 	// Permission name, z.B. "EDIT, DELETE.." usw.
 	private String permissionName;
 	
-	@ManyToMany(fetch=FetchType.LAZY,  mappedBy="permissions")
+	@ManyToMany(fetch=FetchType.EAGER,  mappedBy="permissions")
 	// Die den Permissions zugeteilten roles. Mehrere Permissions können mehreren Roles zugeteilt sein
 	private Set<Role> roles;
 

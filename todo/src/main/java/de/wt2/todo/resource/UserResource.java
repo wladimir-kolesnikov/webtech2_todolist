@@ -1,8 +1,6 @@
 package de.wt2.todo.resource;
 
-
 import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -12,6 +10,8 @@ import javax.transaction.Transactional;
 import javax.ws.rs.Path;
 
 import de.wt2.todo.entity.User;
+
+// Klasse ist momentan nur zum testen da
 
 @Transactional
 @Stateless

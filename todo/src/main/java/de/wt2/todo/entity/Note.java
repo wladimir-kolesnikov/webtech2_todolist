@@ -6,18 +6,16 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity(name="note")
 @Table(name="note")
-
 public class Note extends BaseEntity {
 
 	private static final long serialVersionUID = 3713677712268341918L;
 	
-	@ManyToOne
 	// Der Author
+	// Kein @ManyToOne weil unidirektionales Mapping
 	private User author;
 	
 	// Die Überschrift
@@ -93,5 +91,4 @@ public class Note extends BaseEntity {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
 }

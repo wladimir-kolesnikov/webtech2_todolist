@@ -4,7 +4,7 @@
 <hibernate-configuration>
 
    <session-factory>
-	  <property name = "hibernate.dialect">org.hibernate.dialect.MySQLDialect"</property>
+	  <property name = "hibernate.dialect">org.hibernate.dialect.MySQL5Dialect"</property>
  	  <property name = "hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
  	  <property name = "hibernate.connection.url">java:jboss/datasources/TodoMysqlDS</property>
       <property name = "hibernate.connection.username">root</property>
@@ -13,9 +13,6 @@
       <property name = "hibernate.hbm2ddl.auto">create-drop</property>
       <property name = "show_sql">true</property>
       
-      <mapping class = "de.wt2.todo.entity.User"></mapping>
-      <mapping class = "de.wt2.todo.entity.Role"></mapping>
-      <mapping class = "de.wt2.todo.entity.Permission"></mapping>
-        
+      
    </session-factory>
 </hibernate-configuration>

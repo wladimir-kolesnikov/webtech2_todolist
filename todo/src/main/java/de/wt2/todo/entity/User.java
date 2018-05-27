@@ -12,6 +12,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity(name="user")
 @Table(name="user")
 public class User extends BaseEntity {
@@ -22,10 +24,13 @@ public class User extends BaseEntity {
 	// Der username des Users
 	private String username;
 	
+	@JsonIgnore
+	private String password;
+	
 	// Registrierungsdatum
 	private Date joined;
 	
-	@ManyToMany(fetch=FetchType.LAZY)
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(
 			name="user_role",
 			joinColumns= {@JoinColumn(name="user_name", referencedColumnName="username")},
@@ -34,10 +39,9 @@ public class User extends BaseEntity {
 	// Set von Roles, die dem User zugeordnet sind (z.B. Admin, S-Mod, Guest usw.)
 	private Set<Role> roles;
 	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="author")
+	@OneToMany(fetch=FetchType.EAGER)
 	// Alle Notes, die von dem User erstellt wurden
 	private Set<Note> notes;
-
 
 	public String getUsername() {
 		return username;
@@ -65,6 +69,14 @@ public class User extends BaseEntity {
 
 	public Set<Note> getNotes() {
 		return notes;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public void setNotes(Set<Note> notes) {

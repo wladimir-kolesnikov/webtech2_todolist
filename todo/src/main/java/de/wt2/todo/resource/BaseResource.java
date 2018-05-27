@@ -14,6 +14,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+//Klasse ist momentan nur zum testen da
+
 public abstract class BaseResource<T> {
 	
 	@PersistenceContext
