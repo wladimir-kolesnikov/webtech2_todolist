@@ -31,7 +31,6 @@ public class Note extends BaseEntity {
 	// Wann läuft die Note aus
 	private Date due;
 	
-	
 	@Enumerated(EnumType.STRING)
 	/*
 	 * Die Dringlichkeit des Notes (NORMAL, IMPORTANT, URGENT)

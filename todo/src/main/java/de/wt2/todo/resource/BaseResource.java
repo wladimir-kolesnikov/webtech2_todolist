@@ -21,11 +21,20 @@ public abstract class BaseResource<T> {
 	@PersistenceContext
 	protected EntityManager entityManager;
 	
+	/*
+	 * Abstrakte Methode muss erst in Subklassen implementiert werden, wird jedoch standardmäßig auf den @Path/id
+	 * der API via get request gelegt. @Path wird erst in den Subklassen implementiert und "id" ist jeweils die ID
+	 * nach der gesucht werden soll
+	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
 	public abstract T find(@PathParam("id") long id);
 	
+	/*
+	 * Abstrakte Methode muss erst in Subklassen implementiert werden, wird jedoch standardmäßig auf den @Path
+	 * der API via get request gelegt. @Path wird erst in den Subklassen implementiert
+	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public abstract List<T> findAll();
