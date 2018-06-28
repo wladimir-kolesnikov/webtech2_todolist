@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:http/http.dart';
 
 import 'package:angular/core.dart';
-import 'package:cleanTest2/src/in_memory_db_compnent/in_memory_db_component.dart';
+import 'package:todo/components/in_memory_db_compnent/in_memory_db_component.dart';
 
 
 //Notesservice der Interaktionsfunktionen von Note bezogenen Aufgaben mit dem Server übernimmt

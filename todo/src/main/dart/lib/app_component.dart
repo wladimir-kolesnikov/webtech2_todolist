@@ -1,9 +1,9 @@
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 
-import 'src/notes_component/notes_component.dart';
-import 'src/login_component/login_component.dart';
-import 'src/navigation_component/navigation_component.dart';
+import 'components/notes_component/notes_component.dart';
+import 'components/login_component/login_component.dart';
+import 'components/navigation_component/navigation_component.dart';
 
 // AngularDart info: https://webdev.dartlang.org/angular
 // Components info: https://webdev.dartlang.org/components

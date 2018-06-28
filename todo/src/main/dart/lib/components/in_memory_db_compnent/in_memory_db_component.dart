@@ -2,8 +2,8 @@ import 'package:angular/angular.dart';
 import 'package:http/testing.dart';
 import 'package:http/http.dart';
 
-import 'package:cleanTest2/src/notes_component/Note.dart';
-import 'package:cleanTest2/src/user_component/User.dart';
+import 'package:todo/components/notes_component/Note.dart';
+import 'package:todo/components/user_component/User.dart';
 
 import 'dart:async';
 import 'dart:convert';

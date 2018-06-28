@@ -1,6 +1,6 @@
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import 'package:cleanTest2/src/note_form_component/note_form_component.dart';
+import 'package:todo/components/note_form_component/note_form_component.dart';
 import 'package:angular_forms/angular_forms.dart';
 
 import 'dart:js_util';

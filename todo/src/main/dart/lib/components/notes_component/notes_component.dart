@@ -1,9 +1,9 @@
 import 'package:angular/angular.dart';
 
 import 'package:angular_forms/angular_forms.dart';
-import 'package:cleanTest2/src/in_memory_db_compnent/in_memory_db_component.dart';
-import 'package:cleanTest2/src/user_component/user_service.dart';
-import 'package:cleanTest2/src/user_component/User.dart';
+import 'package:todo/components/in_memory_db_compnent/in_memory_db_component.dart';
+import 'package:todo/components/user_component/user_service.dart';
+import 'package:todo/components/user_component/User.dart';
 
 import 'notes_service.dart';
 import 'Note.dart';

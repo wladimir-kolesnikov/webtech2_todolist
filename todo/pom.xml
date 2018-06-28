@@ -17,7 +17,7 @@
         <wildfly-swarm.version>2018.4.1</wildfly-swarm.version>
         <h2.path>${env.HOME}/todo</h2.path>
         <wildfly.path>${env.HOME}/wildfly-12.0.0.Final</wildfly.path>
-        <dart-sdk.path>${env.HOME}/dart-sdk</dart-sdk.path>
+        <dart-sdk.path>C:\Users\chill\Desktop\webtech2_todolist-master\dart-sdk</dart-sdk.path>
     </properties>
     
     <dependencies>		
@@ -62,16 +62,14 @@
 		</dependency>
     </dependencies>
        
-    
     <build>
     	<resources>
     		<resource>
     			<directory>src/main/dart</directory>
-                <targetPath>${project.build.directory}/${project.build.finalName}</targetPath>
+                <targetPath>${project.build.directory}\${project.build.finalName}</targetPath>
     		</resource>
     	</resources>
     	
-    	<pluginManagement>
 	    	<plugins>
 	    		<plugin>
 	    			<groupId>com.github.dzwicker.dart</groupId>
@@ -105,7 +103,7 @@
 	                        <configuration>
 	                            <pubCommand>build</pubCommand>
 	                            <pubOptions>
-	                                <pubOption>--output=${project.build.directory}/dart</pubOption>
+	                                <pubOption>--output=${project.build.directory}\dart</pubOption>
 	                                <pubOption>--mode=debug</pubOption>
 	                            </pubOptions>
 	                        </configuration>
@@ -120,17 +118,17 @@
 	                <configuration>
 	                    <webResources>
 	                        <resource>
-	                            <directory>src/main/webapp</directory>
+	                            <directory>src\main\webapp</directory>
 	                            <filtering>true</filtering>
 	                        </resource>
 	                        <resource>
-	                            <directory>${project.build.directory}/dart</directory>
+	                             <directory>${project.build.directory}\dart</directory>
+	                        	<!-- <directory>src/main/dart</directory> -->
 	                        </resource>
 	                    </webResources>
 	                </configuration>
 	            </plugin>
 	    	</plugins>
-		</pluginManagement>
     </build>
     
     <profiles>
@@ -170,7 +168,7 @@
                                         <!-- Allows for debugging as remote application on port 8787 -->
                                         <!--argument>-agentlib:jdwp=transport=dt_socket,address=8787,server=y,suspend=n</argument-->
                                         <argument>-jar</argument>
-                                        <argument>${project.build.directory}/${project.build.finalName}-swarm.jar</argument>
+                                        <argument>${project.build.directory}\${project.build.finalName}-swarm.jar</argument>
                                     </arguments>
                                 </configuration>
                             </execution>
@@ -202,7 +200,7 @@
                                             <version>${project.version}</version>
                                             <type>war</type>
                                             <overWrite>true</overWrite>
-                                            <outputDirectory>${wildfly.path}/standalone/deployments/</outputDirectory>
+                                            <outputDirectory>${wildfly.path}\standalone/deployments/</outputDirectory>
                                         </artifactItem>
                                     </artifactItems>
                                 </configuration>
@@ -212,9 +210,52 @@
                 </plugins>
             </build>
     	</profile>
+    	
+    	 <profile>
+            <!-- add workarounds when importing the project in Eclipse -->
+            <id>eclipse-m2e-configs</id>
+            <activation>
+                <property>
+                    <!-- property is set by Eclipse's m2e plugin -->
+                    <name>m2e.version</name>
+                </property>
+            </activation>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <!-- This gets rid of the nasty "Plugin execution not covered by lifecycle configuration" warning by m2e -->
+                        <plugin>
+                            <groupId>org.eclipse.m2e</groupId>
+                            <artifactId>lifecycle-mapping</artifactId>
+                            <version>1.0.0</version>
+                            <configuration>
+                                <lifecycleMappingMetadata>
+                                    <pluginExecutions>
+                                        <pluginExecution>
+                                            <pluginExecutionFilter>
+                                                <groupId>com.github.dzwicker.dart</groupId>
+                                                <artifactId>dart-maven-plugin</artifactId>
+                                                <versionRange>[3.0.9,)</versionRange>
+                                                <goals>
+                                                    <goal>pub</goal>
+                                                </goals>
+                                            </pluginExecutionFilter>
+                                            <action>
+                                                <execute>
+                                                    <!-- uncomment the following statement to run the dart compiler on every refresh -->
+                                                    <!--<runOnIncremental>true</runOnIncremental>-->
+                                                    <ignore></ignore>
+                                                </execute>
+                                            </action>
+                                        </pluginExecution>
+                                    </pluginExecutions>
+                                </lifecycleMappingMetadata>
+                            </configuration>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
     </profiles>
-    
-    
-    
-    
+
 </project>

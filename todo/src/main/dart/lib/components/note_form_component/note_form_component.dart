@@ -1,9 +1,9 @@
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 
-import 'package:cleanTest2/src/test_component/notes_service.dart';
-import 'package:cleanTest2/src/test_component/Note.dart';
-import 'package:cleanTest2/src/test_component/test_component.dart';
+import 'package:todo/components/test_component/notes_service.dart';
+import 'package:todo/components/test_component/Note.dart';
+import 'package:todo/components/test_component/test_component.dart';
 
 @Component(
   selector: 'note-form-component',

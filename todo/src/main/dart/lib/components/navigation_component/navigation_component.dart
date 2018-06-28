@@ -1,9 +1,9 @@
 import 'package:angular/angular.dart';
-import 'package:cleanTest2/src/notes_component/notes_component.dart';
+import 'package:todo/components/notes_component/notes_component.dart';
 //profile component
-import 'package:cleanTest2/src/login_component/login_component.dart';
-import 'package:cleanTest2/src/user_component/profile_component.dart';
-import 'package:cleanTest2/src/user_component/User.dart';
+import 'package:todo/components/login_component/login_component.dart';
+import 'package:todo/components/user_component/profile_component.dart';
+import 'package:todo/components/user_component/User.dart';
 
 //Navigationscomponente, die es erlaubt zwischen dem Profile und dem Notesview hin- und herzuschalten
 @Component(
