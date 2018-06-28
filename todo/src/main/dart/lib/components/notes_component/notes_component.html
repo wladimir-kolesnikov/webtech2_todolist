@@ -1,0 +1,120 @@
+<h2>NOTES</h2>
+
+<!-- Button um Hinzufügen Formular anzuzeigen -->
+<button class="normalButtons" (click)="createAddForm()">Add Note</button>
+<br>
+
+
+<!-- Ein Notebutton für jede Note des Users werden angezeigt -->
+<div class="notes">
+    <div *ngFor="let note of noteList">
+        <button class="notesButton" (click)="selectNote(note)">
+            <h3>{{note.headline}}</h3>
+            <div><p>due to: </p></div>
+            <p>{{note.due}}
+            <p>{{note.relevance.toString()}}</p>
+        </button>
+    </div>
+
+    <br>
+
+</div>
+
+<!-- Details der selektierten Note werden angezeigt, wenn grade nicht editiert wird -->
+<!-- Mit Knöpfen zum Löschen, Editieren und versenden an andere User -->
+<div class="formesAndDetails">
+    <div class="details" *ngIf="selectedNote != null && editing == false">
+        <h3>Note Details</h3>
+
+        <div class="detailsLabel">
+            <p>Author: </p>
+            <p>Headline:</p>
+            <p>Created:</p>
+            <p>Last Edited:</p>
+            <p>Due:</p>
+            <p>Relevance:</p>
+            <p class="contentP">Content:</p>
+        </div>
+
+
+        <div class="detailsInformation">
+            <!--<p>{{selectedNote.id}}</p>-->
+            <p>{{selectedNote.author}}</p>
+            <p>{{selectedNote.headline}}</p>
+            <p>{{selectedNote.created}}</p>
+            <p>{{selectedNote.lastEdited}}</p>
+            <p>{{selectedNote.due}}</p>
+            <p>{{selectedNote.relevance}}</p>
+        </div>
+
+        <div class="clr"></div>
+
+        <p style="margin-bottom: 15px">{{selectedNote.content}}</p>
+
+        <button class="normalButtons" (click)="deleteNote(selectedNote)">Delete</button>
+        <button class="normalButtons" (click)="startEditNote()">Edit</button>
+        <br>
+
+        <input class="inputField" type="text" name="user" #username><br>
+        <button class="normalButtons" (click)="sendToUser(username.value)">Send To</button>
+    </div>
+</div>
+
+<!-- Editierung Formular -->
+<!-- Knöpfe zum Submitten der änderungen und zum Abbrechen des Editierens -->
+<div class="formesAndDetails">
+    <div *ngIf="editing == true">
+        <h3>Edit Note</h3>
+        <div>
+            <form >
+                <p class="inputLabel">headline:</p>
+                <input class="inputField" type="text" [value]="selectedNote.headline" name="headline"  #headline ><br>
+                <p class="inputLabel">due:</p>
+                <input class="inputField" type="date" [value]="selectedNote.due" name="dueDate" #due><br>
+                <p class="inputLabel">content:</p>
+                <textarea class="customTextArea" rows="4" cols="50" [value]="selectedNote.content" #content ></textarea><br>
+                <p class="inputLabel">relevance:</p>
+                <select class="customSelect" name="relevance" [value]="selectedNote.relevance" #relevance >
+                    <option value="Relevance.NORMAL">Normal</option>
+                    <option value="Relevance.IMPORTANT">Important</option>
+                    <option value="Relevance.URGENT">Urgent</option>
+                </select>
+            </form>
+            <button class="normalButtons" (click)="cancelUpdate()">Cancel</button>
+            <button class="normalButtons" (click)="updateNote(due.value, headline.value, relevance.value, content.value)">Submit</button>
+            <p>{{errorMessage}}</p>
+        </div>
+    </div>
+</div>
+
+<!-- Hinzufügen Formular -->
+<div class="formesAndDetails">
+    <div *ngIf="showForm == true">
+        <h3>Add Note</h3>
+        <div>
+            <form >
+                <p class="inputLabel">headline:</p>
+                <input class="inputField" type="text" name="headline"  #headline ><br>
+
+                <!--input class="inputField" type="checkbox" name="checkDue" checked #check-->
+
+                <p class="inputLabel">due:</p>
+                <input class="inputField" type="date" name="dueDate" #due><br>
+
+                <p class="inputLabel">content:</p>
+                <textarea class="customTextArea" rows="4" cols="50" #content></textarea>
+                <br>
+
+                <p class="inputLabel">relevance:</p>
+                <select class="customSelect" name="relevance" #relevance >
+                    <option value="Relevance.NORMAL">Normal</option>
+                    <option value="Relevance.IMPORTANT">Important</option>
+                    <option value="Relevance.URGENT">Urgent</option>
+                </select>
+
+            </form>
+            <button class="normalButtons" (click)="submitAddForm(due.value, headline.value, relevance.value, content.value)">Submmit</button>
+            <p>{{errorMessage}}</p>
+        </div>
+    </div>
+</div>

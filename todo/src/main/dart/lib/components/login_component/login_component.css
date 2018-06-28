@@ -1,0 +1,27 @@
+.inputLabel{
+    padding: 0px 0px;
+    margin: 3px 0px
+}
+
+.inputField{
+    border: 1px solid #aaa;
+    padding: 1px 0px;
+    margin: 3px 0px;
+    width:400px;
+    height:20px
+}
+
+.normalButtons{
+    margin-top: 7px;
+    background-color: yellowgreen;
+    width: 100px;
+    height: 30px;
+}
+
+.normalButtons p{
+    padding: 0px;
+    margin: 0px;
+}
+
+
+

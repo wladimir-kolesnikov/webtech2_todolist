@@ -1,0 +1,50 @@
+<!-- Login Formular und Buttons  -->
+<div *ngIf="loginAccepted == false && registering == false">
+    <h4>Login</h4>
+    <form>
+        <p class="inputLabel">login name:</p>
+        <input class="inputField" type="text" name="username" #username required><br>
+        <p class="inputLabel">password:</p>
+        <input class="inputField" type="text" name="password" #password required><br>
+    </form>
+
+    <button class="normalButtons" (click)="login(username.value, password.value)">Login</button>
+    <button class="normalButtons" (click)="startRegistration()">Register</button>
+
+    <!-- Anzeigen der User zum Debuggen -->
+    <div *ngFor="let user of userList">
+        <div>
+            <p>{{user.id}}</p>
+            <p>{{user.username}}</p>
+            <p>{{user.password}}</p>
+            <p>{{user.joined}}</p>
+            <div *ngFor="let role of user.roles">
+                <p>{{role.toString()}}</p>
+            </div>
+            <br>
+        </div>
+    </div>
+
+</div>
+
+<!-- Regestriegungsformular und Buttons -->
+<div *ngIf="registering == true && loginAccepted == false">
+    <form>
+    <h4>Register</h4>
+        <p class="inputLabel">login name:</p>
+        <input class="inputField" type="text" name="usernameRegister" #usernameRegister required><br>
+        <p class="inputLabel">password:</p>
+        <input class="inputField" type="text" name="passwordRegister" #passwordRegister required><br>
+
+    </form>
+    <button class="normalButtons" (click)="register(usernameRegister.value, passwordRegister.value)">Submit</button>
+    <button class="normalButtons" (click)="cancelRegistration()">Cancel</button>
+
+</div>
+
+
+<div *ngIf="loginAccepted == true">
+
+    <nav-comp [currentUser]="currentUser"></nav-comp>
+
+</div>

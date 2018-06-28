@@ -1,0 +1,52 @@
+.normalButtons{
+    background-color: yellowgreen;;
+    width: 100px;
+    height: 30px;
+    margin: 3px;
+}
+
+.detailsLabel{
+    float: left;
+    margin-bottom: 9px;
+    width: 33%;
+    box-sizing: border-box;
+    height: 170px;
+}
+
+.detailsLabel p{
+    margin: 5px 0px;
+}
+
+.detailsInformation{
+    float: left;
+    margin-bottom: 9px;
+    width: 66%;
+    box-sizing: border-box;
+    height: 170px;
+}
+
+.detailsInformation p{
+    margin: 5px 0px;
+}
+
+.clr{
+    clear:both;
+}
+
+.inputLabel{
+    padding: 0px 0px;
+    margin: 3px
+}
+
+.inputField{
+    margin:3px;
+    width:400px;
+    height:20px;
+}
+
+.changePasswordButton{
+    background-color: yellowgreen;;
+    width: 150px;
+    height: 30px;
+    margin: 3px;
+}

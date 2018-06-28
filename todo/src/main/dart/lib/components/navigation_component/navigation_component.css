@@ -1,0 +1,10 @@
+.navbar{
+    background-color: lightgray;
+    padding: 5px;
+}
+
+.normalButtons{
+    background-color: yellowgreen;
+    width: 100px;
+    height: 30px;
+}
