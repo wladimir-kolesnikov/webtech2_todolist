@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 //Note Klasse als Datenstruktur für die Note Entität und Helferfunktinen für JSON
 class Note {
 
@@ -31,8 +33,13 @@ class Note {
     newNote.headline = note['headline'];
     newNote.author = note['author'];
     newNote.created = DateTime.parse(note['created']);
+    //print(note['created']);
+    //print(parseDateTimetoDate(note['created']));
+    //newNote.created = parseDateTimetoDate(note['created']);
     newNote.lastEdited = DateTime.parse(note['lastEdited']);
+    //newNote.lastEdited = parseDateTimetoDate(note['lastEdited']);
     newNote.due = DateTime.parse(note['due']);
+    //newNote.due = parseDateTimetoDate(note['due']);
     newNote.relevance = enumFromString(note['relevance']);
     newNote.content = note['content'];
 
@@ -94,4 +101,12 @@ class Note {
 
     NORMAL, IMPORTANT, URGENT
 
+  }
+
+  DateTime parseDateTimetoDate(String dtS){
+    DateTime dt = DateTime.parse(dtS);
+    var formatter = new DateFormat('yyyy-MM-dd');
+    String formatted = formatter.format(dt);
+    print(formatted);
+    return DateTime.parse(formatted);
   }

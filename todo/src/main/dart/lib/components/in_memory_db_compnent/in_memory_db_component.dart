@@ -181,7 +181,7 @@ List<User> getUsers(){
   user1.id = 0;
   user1.username = "user1";
   user1.password = "password1";
-  user1.joined = new DateTime.now().toUtc();
+  user1.joined = new DateTime.now();
   user1.roles = new Set<Role>();
   user1.roles.add(Role.USER);
   user1.roles.add(Role.SUPERMOD);
@@ -191,7 +191,7 @@ List<User> getUsers(){
   user2.id = 1;
   user2.username = "user2";
   user2.password = "password2";
-  user2.joined = new DateTime.now().toUtc();
+  user2.joined = new DateTime.now();
   user2.roles = new Set<Role>();
   user2.roles.add(Role.ADMIN);
 

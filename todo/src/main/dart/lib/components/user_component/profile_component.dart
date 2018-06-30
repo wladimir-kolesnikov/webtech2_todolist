@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:todo/components/in_memory_db_compnent/in_memory_db_component.dart';
 import 'package:todo/components/user_component/user_service.dart';
 import 'package:todo/components/user_component/User.dart';
+import 'package:intl/intl.dart';
 
 //Profilcomponente zum Anzeigen der Userdaten und Ändern des Passwortes
 @Component(
@@ -51,6 +52,26 @@ class ProfileComponent implements OnInit{
   //Editierung wird abgebrochen
   void cancelEditing(){
     editing = false;
+  }
+
+  String roleToString(Role rel){
+    switch(rel){
+      case Role.USER:
+        return "User";
+        break;
+      case Role.ADMIN:
+        return "Admin";
+        break;
+      case Role.SUPERMOD:
+        return "Supermod";
+        break;
+    }
+  }
+
+  String dateTimeToDateString(DateTime dt){
+    var formatter = new DateFormat('dd-MM-yyyy');
+    String formatted = formatter.format(dt);
+    return formatted;
   }
 
 }

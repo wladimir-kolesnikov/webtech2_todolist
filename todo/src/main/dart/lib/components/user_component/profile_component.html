@@ -1,4 +1,4 @@
-<h3>Profile</h3>
+<h2>Profile</h2>
 
 <!-- Details des Uers werden angezeigt -->
 
@@ -16,10 +16,10 @@
         <!--p>{{currentUser.id}}</p-->
         <p>{{currentUser.username}}</p>
         <p>{{currentUser.password}}</p>
-        <p>{{currentUser.joined}}</p>
+        <p>{{dateTimeToDateString(currentUser.joined)}}</p>
         <div *ngFor="let role of currentUser.roles">
-            <p>{{role.toString()}}</p>
-        </div>
+            <p>{{roleToString(role)}}</p>
+    </div>
         <br>
     </div>
 </div>

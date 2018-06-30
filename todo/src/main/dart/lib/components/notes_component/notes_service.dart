@@ -13,8 +13,9 @@ import 'package:todo/components/in_memory_db_compnent/in_memory_db_component.dar
 class NotesService {
 
   final InMemoryDatabaseService inMemoryDatabaseService;
+  final Client _http;
 
-  NotesService(this.inMemoryDatabaseService);
+  NotesService(this.inMemoryDatabaseService, this._http);
 
   List<Note> mockNoteList = [];
 
@@ -23,6 +24,8 @@ class NotesService {
   Future<List<Note>> getNoteList(int id) async {
     try{
       final response = await inMemoryDatabaseService.get('api/users/$id/notes');
+      //URL anpassen
+      //final response = await _http.get('api/users/$id/notes');
       final notes = (_extractData(response) as List).map((json) => new Note.fromJson(json)).toList();
       print(_extractData(response));
 
@@ -39,6 +42,8 @@ class NotesService {
     int NoteID = note.id;
     try{
       final response = await inMemoryDatabaseService.delete('api/users/$id/notes/$NoteID');
+      //URL anpassen
+      //final response = await _http.delete('api/users/$id/notes/$NoteID');
     }
     catch(e){
       _handleError(e);
@@ -51,6 +56,9 @@ class NotesService {
    try{
      final response = await inMemoryDatabaseService.post('api/users/$id/notes', headers: {'Conent-Type':'applicaton/json'},
          body: JSON.encode(note.toJson()));
+     //URL anpassen
+     //final response = await _http.post('api/users/$id/notes', headers: {'Conent-Type':'applicaton/json'},
+     //         body: JSON.encode(note.toJson()));
      final returnNote = new Note.fromJson(_extractData(response));
      return returnNote;
 
@@ -67,6 +75,9 @@ class NotesService {
   try{
     final response = await inMemoryDatabaseService.put('api/users/$id/notes/$NoteID', headers: {'Conent-Type':'applicaton/json'},
         body: JSON.encode(note.toJson()));
+    //URL anpassen
+    //final response = await _http.put('api/users/$id/notes/$NoteID', headers: {'Conent-Type':'applicaton/json'},
+    //        body: JSON.encode(note.toJson()));
     final returnNote = new Note.fromJson(_extractData(response));
     return returnNote;
 

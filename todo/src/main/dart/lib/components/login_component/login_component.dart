@@ -9,7 +9,6 @@ import 'dart:async';
 import 'package:todo/components/navigation_component/navigation_component.dart';
 import 'package:todo/components/in_memory_db_compnent/in_memory_db_component.dart';
 
-
 //Component implementiert den Login
 @Component(
   selector: 'login-comp',
