@@ -11,8 +11,8 @@
         <button class="notesButton" (click)="selectNote(note)">
             <h3>{{note.headline}}</h3>
             <div><p>due to: </p></div>
-            <p>{{note.due}}
-            <p>{{note.relevance.toString()}}</p>
+            <p>{{dateTimeToDateString(note.due)}}
+            <p>{{relevanceToString(note.relevance)}}</p>
         </button>
     </div>
 
@@ -41,10 +41,10 @@
             <!--<p>{{selectedNote.id}}</p>-->
             <p>{{selectedNote.author}}</p>
             <p>{{selectedNote.headline}}</p>
-            <p>{{selectedNote.created}}</p>
-            <p>{{selectedNote.lastEdited}}</p>
-            <p>{{selectedNote.due}}</p>
-            <p>{{selectedNote.relevance}}</p>
+            <p>{{dateTimeToDateString(selectedNote.created)}}</p>
+            <p>{{dateTimeToDateString(selectedNote.lastEdited)}}</p>
+            <p>{{dateTimeToDateString(selectedNote.due)}}</p>
+            <p>{{relevanceToString(selectedNote.relevance)}}</p>
         </div>
 
         <div class="clr"></div>
@@ -70,7 +70,7 @@
                 <p class="inputLabel">headline:</p>
                 <input class="inputField" type="text" [value]="selectedNote.headline" name="headline"  #headline ><br>
                 <p class="inputLabel">due:</p>
-                <input class="inputField" type="date" [value]="selectedNote.due" name="dueDate" #due><br>
+                <input class="inputField" type="date" [value]="selectedNote.due" name="dueDate" value="selectedNote.due" #due><br>
                 <p class="inputLabel">content:</p>
                 <textarea class="customTextArea" rows="4" cols="50" [value]="selectedNote.content" #content ></textarea><br>
                 <p class="inputLabel">relevance:</p>
