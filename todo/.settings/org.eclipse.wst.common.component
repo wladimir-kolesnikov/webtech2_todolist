@@ -5,7 +5,15 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp/web-resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/dart"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/dart/lib"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/dart/test"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/dart/web"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/webapp"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/target/generated-sources/annotations"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/target/generated-test-sources/test-annotations"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
         <property name="context-root" value="todo"/>
         <property name="java-output-path" value="/todo/target/classes"/>
     </wb-module>
