@@ -1,14 +1,14 @@
-
-
 <!-- Buttons zum wechseln zwischen Componenten -->
 <div class="navbar">
     <button class="normalButtons" (click)="switchToProfile()">Profile</button>
     <button class="normalButtons" (click)="switchToNotes()">Notes</button>
+    <button class="normalButtons" (click)="switchToAdminpage()">Admin</button>
 </div>
 
 <!-- Switch, die entsprechende Componente anzeigt -->
 <div [ngSwitch]="currentPage">
     <test-comp *ngSwitchCase = "NOTES" [userID]="currentUser.id"></test-comp>
     <profile-comp *ngSwitchCase = "PROFILE" [currentUser]="currentUser"></profile-comp>
+    <admin-comp *ngSwitchCase = "ADMIN"></admin-comp>
     <div *ngSwitchDefault>default</div>
 </div>
