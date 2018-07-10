@@ -1,0 +1,22 @@
+<div *ngIf="users == true">
+    <h2>USERS</h2>
+
+    <div class="notes">
+        <div *ngFor="let user of userList">
+            <button class="notesButton" (click)="selectUser(user)">
+                <h3>{{user.username}}</h3>
+                <p>{{user.password}}</p>
+                <p>{{dateTimeToDateString(user.joined)}}</p>
+            </button>
+        </div>
+        <br>
+    </div>
+</div>
+
+<div *ngIf="notes == true">
+
+    <test-comp [userID]="selectedUser.id"></test-comp>
+
+    <button class="normalButtons" (click)="goBack()">Go Back</button>
+
+</div>

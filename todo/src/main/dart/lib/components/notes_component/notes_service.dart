@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:http/http.dart';
 
 import 'package:angular/core.dart';
-import 'package:todo/components/in_memory_db_compnent/in_memory_db_component.dart';
+import 'package:cleanTest2/src/in_memory_db_compnent/in_memory_db_component.dart';
 
 
 //Notesservice der Interaktionsfunktionen von Note bezogenen Aufgaben mit dem Server übernimmt
@@ -23,9 +23,9 @@ class NotesService {
   //Funktion holt alle Notes eines Users mit bestimmter id
   Future<List<Note>> getNoteList(int id) async {
     try{
-      final response = await inMemoryDatabaseService.get('api/users/$id/notes');
+      //final response = await inMemoryDatabaseService.get('api/users/$id/notes');
       //URL anpassen
-      //final response = await _http.get('api/users/$id/notes');
+      final response = await _http.get('api/users/$id/notes');
       final notes = (_extractData(response) as List).map((json) => new Note.fromJson(json)).toList();
       print(_extractData(response));
 
@@ -41,9 +41,9 @@ class NotesService {
   Future deleteNote(Note note, int id) async {
     int NoteID = note.id;
     try{
-      final response = await inMemoryDatabaseService.delete('api/users/$id/notes/$NoteID');
+      //final response = await inMemoryDatabaseService.delete('api/users/$id/notes/$NoteID');
       //URL anpassen
-      //final response = await _http.delete('api/users/$id/notes/$NoteID');
+      final response = await _http.delete('api/users/$id/notes/$NoteID');
     }
     catch(e){
       _handleError(e);
@@ -54,11 +54,13 @@ class NotesService {
   //Fügt eine neue Note einem bestimmt User hinzu
  Future<Note> addNote(Note note, int id) async {
    try{
-     final response = await inMemoryDatabaseService.post('api/users/$id/notes', headers: {'Conent-Type':'applicaton/json'},
-         body: JSON.encode(note.toJson()));
+     print(note);
+     print(note.toJson());
+     //final response = await inMemoryDatabaseService.post('api/users/$id/notes', headers: {'Conent-Type':'applicaton/json'},
+     //    body: JSON.encode(note.toJson()));
      //URL anpassen
-     //final response = await _http.post('api/users/$id/notes', headers: {'Conent-Type':'applicaton/json'},
-     //         body: JSON.encode(note.toJson()));
+     final response = await _http.post('api/users/$id/notes', headers: {'Conent-Type':'applicaton/json'},
+              body: JSON.encode(note.toJson()));
      final returnNote = new Note.fromJson(_extractData(response));
      return returnNote;
 
@@ -73,11 +75,11 @@ class NotesService {
  Future updateNote(Note note, int id) async {
    int NoteID = note.id;
   try{
-    final response = await inMemoryDatabaseService.put('api/users/$id/notes/$NoteID', headers: {'Conent-Type':'applicaton/json'},
-        body: JSON.encode(note.toJson()));
+    //final response = await inMemoryDatabaseService.put('api/users/$id/notes/$NoteID', headers: {'Conent-Type':'applicaton/json'},
+    //    body: JSON.encode(note.toJson()));
     //URL anpassen
-    //final response = await _http.put('api/users/$id/notes/$NoteID', headers: {'Conent-Type':'applicaton/json'},
-    //        body: JSON.encode(note.toJson()));
+    final response = await _http.put('api/users/$id/notes/$NoteID', headers: {'Conent-Type':'applicaton/json'},
+            body: JSON.encode(note.toJson()));
     final returnNote = new Note.fromJson(_extractData(response));
     return returnNote;
 

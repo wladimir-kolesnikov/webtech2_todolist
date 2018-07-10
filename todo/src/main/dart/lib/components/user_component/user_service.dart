@@ -4,9 +4,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart';
 
-import 'package:todo/components/in_memory_db_compnent/in_memory_db_component.dart';
-import 'package:todo/components/user_component/User.dart';
-
+import 'package:cleanTest2/src/in_memory_db_compnent/in_memory_db_component.dart';
+import 'package:cleanTest2/src/user_component/User.dart';
 
 //Userservice der Interaktionsfunktionen von User bezogenen Aufgaben mit dem Server übernimmt
 @Injectable()
@@ -20,9 +19,9 @@ class UserService{
   //Funtion holt alle User aus der Datenbank
   Future<List<User>> getUserList() async{
     try{
-      final response = await inMemoryDatabaseService.get('api/users');
+      //final response = await inMemoryDatabaseService.get('api/users');
       //URL anpassen
-      //final response = await _http.get('api/users');
+      final response = await _http.get('api/users');
       //print(_extractData(response).toString());
       final users = (_extractData(response) as List).map((json) => new User.fromJason(json)).toList();
       return users;
@@ -37,11 +36,11 @@ class UserService{
   //Fügt einen neuen User hinzu
   Future addUser(User user) async {
     try{
-      final response = await inMemoryDatabaseService.post('api/users', headers: {'Conent-Type':'applicaton/json'},
-          body: JSON.encode(user.toJson()));
-      //URL anpassen
-      //final response = await _http.post('api/users', headers: {'Conent-Type':'applicaton/json'},
+      //final response = await inMemoryDatabaseService.post('api/users', headers: {'Conent-Type':'applicaton/json'},
       //    body: JSON.encode(user.toJson()));
+      //URL anpassen
+    final response = await _http.post('api/users', headers: {'Conent-Type':'applicaton/json'},
+        body: JSON.encode(user.toJson()));
 
     }
     catch(e){
@@ -55,11 +54,11 @@ class UserService{
   Future updateUser(User user) async {
     int id = user.id;
     try{
-      final response = await inMemoryDatabaseService.put('api/users/$id', headers: {'Content-Type':'application/json'},
-          body:JSON.encode(user.toJson()));
-      //URL anpassen
-      //final response = await _http.put('api/users/$id', headers: {'Content-Type':'application/json'},
+      //final response = await inMemoryDatabaseService.put('api/users/$id', headers: {'Content-Type':'application/json'},
       //    body:JSON.encode(user.toJson()));
+      //URL anpassen
+      final response = await _http.put('api/users/$id', headers: {'Content-Type':'application/json'},
+          body:JSON.encode(user.toJson()));
 
     }
     catch(e){
