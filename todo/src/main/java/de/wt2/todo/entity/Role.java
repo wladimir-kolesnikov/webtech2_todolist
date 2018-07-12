@@ -20,6 +20,7 @@ public class Role extends BaseEntity {
 	// Name der Role (z.B. Admin, S-Mod etc.)
 	private String roleName;
 	
+	/*
 	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(
 			name="role_permission",
@@ -30,8 +31,10 @@ public class Role extends BaseEntity {
 	 * Explizite Permissions, z.b. "EDIT, DELETE..." usw.
 	 * Damit die Beziehung nur in 1 Table gespeichert wird, wird JoinTable verwendet
 	 * In der DB Tabelle wird "id" zu "permission_id"
-	 */
+	
 	private Set<Permission> permissions;
+	*/
+	
 	
 	@ManyToMany(fetch=FetchType.EAGER, mappedBy="roles")
 	// Die den Roles zugeteilten User. Mehrere Roles können mehrere User beinhalten
@@ -45,13 +48,17 @@ public class Role extends BaseEntity {
 		this.roleName = roleName;
 	}
 
+	/*
 	public Set<Permission> getPermissions() {
 		return permissions;
 	}
-
+	*/
+	
+	/*
 	public void setPermissions(Set<Permission> permissions) {
 		this.permissions = permissions;
 	}
+	*/
 
 	public Set<User> getUsers() {
 		return users;

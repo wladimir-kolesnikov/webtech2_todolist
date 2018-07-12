@@ -4,8 +4,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart';
 
-import 'package:cleanTest2/src/in_memory_db_compnent/in_memory_db_component.dart';
-import 'package:cleanTest2/src/user_component/User.dart';
+import 'package:todo/components/in_memory_db_compnent/in_memory_db_component.dart';
+import 'package:todo/components/user_component/User.dart';
 
 //Userservice der Interaktionsfunktionen von User bezogenen Aufgaben mit dem Server übernimmt
 @Injectable()

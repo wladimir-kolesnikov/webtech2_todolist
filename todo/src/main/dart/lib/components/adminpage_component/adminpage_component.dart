@@ -1,8 +1,8 @@
 import 'package:angular/angular.dart';
 
-import 'package:cleanTest2/src/user_component/user_service.dart';
-import 'package:cleanTest2/src/user_component/User.dart';
-import 'package:cleanTest2/src/notes_component/notes_component.dart';
+import 'package:todo/components/user_component/user_service.dart';
+import 'package:todo/components/user_component/User.dart';
+import 'package:todo/components/notes_component/notes_component.dart';
 
 import 'dart:async';
 import 'package:intl/intl.dart';
