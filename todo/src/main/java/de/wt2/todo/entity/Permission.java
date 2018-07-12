@@ -1,3 +1,4 @@
+/*
 package de.wt2.todo.entity;
 
 import java.util.Set;
@@ -42,3 +43,4 @@ public class Permission extends BaseEntity {
 		return serialVersionUID;
 	}
 }
+*/
