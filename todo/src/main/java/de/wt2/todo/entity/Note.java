@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity(name="note")
@@ -16,7 +17,7 @@ public class Note extends BaseEntity {
 	
 	// Der Author
 	// Kein @ManyToOne weil unidirektionales Mapping
-	private User author;
+	private String author;
 	
 	// Die Überschrift
 	private String headline;
@@ -39,11 +40,11 @@ public class Note extends BaseEntity {
 	 */
 	private Relevance relevance;
 
-	public User getAuthor() {
+	public String getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(User author) {
+	public void setAuthor(String author) {
 		this.author = author;
 	}
 
