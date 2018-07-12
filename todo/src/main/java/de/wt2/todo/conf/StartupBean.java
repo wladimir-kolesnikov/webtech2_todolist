@@ -1,6 +1,7 @@
 package de.wt2.todo.conf;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
@@ -11,7 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-import de.wt2.todo.entity.Permission;
+//import de.wt2.todo.entity.Permission;
 import de.wt2.todo.entity.Role;
 import de.wt2.todo.entity.User;
 
@@ -42,6 +43,8 @@ public class StartupBean {
 		user1.setUsername("Student_1");
 		user1.setJoined(new Date());
 		user1.setPassword("test1");
+		//Set<Role> newRoles = new Set<Role>();
+		user1.setRoles(new HashSet<Role>());
 		
 		User user2 = new User();
 		user2.setUsername("Student_2");
@@ -53,25 +56,29 @@ public class StartupBean {
 		user3.setJoined(new Date());
 		user3.setPassword("test3");
 
-		entityManager.persist(user1);
+		//entityManager.persist(user1);
 		entityManager.persist(user2);
 		entityManager.persist(user3);
 		
-//		Role adminRole = new Role();
-//		adminRole.setRoleName("admin");
-//		entityManager.persist(adminRole);
-//		
-//		Permission edit = new Permission();
-//		edit.setPermissionName("EDIT");
-//		entityManager.persist(edit);
-//		
-//		Permission delete = new Permission();
-//		delete.setPermissionName("DELETE");
-//		entityManager.persist(delete);
-//
-//		Permission view = new Permission();
-//		view.setPermissionName("VIEW");
-//		entityManager.persist(view);
+		Role adminRole = new Role();
+		adminRole.setRoleName("admin");
+		HashSet<User> users = new HashSet<User>();
+		adminRole.setUsers(users);
+		entityManager.persist(adminRole);
+		
+		/*
+		Permission edit = new Permission();
+		edit.setPermissionName("EDIT");
+		entityManager.persist(edit);
+		
+		Permission delete = new Permission();
+		delete.setPermissionName("DELETE");
+		entityManager.persist(delete);
+
+		Permission view = new Permission();
+		view.setPermissionName("VIEW");
+		entityManager.persist(view);
+		*/
 //		
 //		Set<Permission> adminPermissions = adminRole.getPermissions();
 //		adminPermissions.add(edit);
@@ -80,12 +87,19 @@ public class StartupBean {
 //		
 //		adminRole.setPermissions(adminPermissions);
 //		entityManager.persist(adminPermissions);
+//		entityManager.persist(adminRole);
 //		
-//		Set<Role> adminRoles = user1.getRoles();
-//		adminRoles.add(adminRole);
+		Set<Role> adminRoles = user1.getRoles();
+		Set<User> roleUsers = adminRole.getUsers();
+		roleUsers.add(user1);
+
+		adminRole.setUsers(roleUsers);
+		entityManager.persist(adminRole);
+		
+		adminRoles.add(adminRole);
 //		
-//		user1.setRoles(adminRoles);
-//		entityManager.persist(user1);
+		user1.setRoles(adminRoles);
+		entityManager.persist(user1);
 //		
 	}
 	
