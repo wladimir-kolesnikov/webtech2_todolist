@@ -5,7 +5,7 @@
         <div *ngFor="let user of userList">
             <button class="notesButton" (click)="selectUser(user)">
                 <h3>{{user.username}}</h3>
-                <p>{{user.password}}</p>
+                <!--p>{{user.password}}</p-->
                 <p>{{dateTimeToDateString(user.joined)}}</p>
             </button>
         </div>
