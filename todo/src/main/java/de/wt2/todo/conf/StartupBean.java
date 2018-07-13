@@ -1,6 +1,8 @@
 package de.wt2.todo.conf;
 
+import java.time.LocalTime;
 import java.util.Date;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,9 +14,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+
+
 //import de.wt2.todo.entity.Permission;
 import de.wt2.todo.entity.Role;
 import de.wt2.todo.entity.User;
+import de.wt2.todo.entity.Note;
+import de.wt2.todo.entity.Relevance;
 
 /*
  * startup() Methode wird jedes Mal beim Starten und 
@@ -45,6 +51,7 @@ public class StartupBean {
 		user1.setPassword("test1");
 		//Set<Role> newRoles = new Set<Role>();
 		user1.setRoles(new HashSet<Role>());
+		user1.setNotes(new HashSet<Note>());
 		
 		User user2 = new User();
 		user2.setUsername("Student_2");
@@ -56,15 +63,33 @@ public class StartupBean {
 		user3.setJoined(new Date());
 		user3.setPassword("test3");
 
-		//entityManager.persist(user1);
+		entityManager.persist(user1);
 		entityManager.persist(user2);
 		entityManager.persist(user3);
 		
 		Role adminRole = new Role();
 		adminRole.setRoleName("admin");
 		HashSet<User> users = new HashSet<User>();
-		adminRole.setUsers(users);
 		entityManager.persist(adminRole);
+		
+		
+		Note note1 = new Note();
+		note1.setAuthor(user1.getUsername());
+		note1.setCreated(new Date());
+		note1.setDue(new Date());
+		note1.setHeadline("test");
+		note1.setLastEdited(new Date());
+		note1.setRelevance(Relevance.IMPORTANT);
+		entityManager.persist(note1);
+		
+		Note note2 = new Note();
+		note2.setAuthor(user1.getUsername());
+		note2.setCreated(new Date());
+		note2.setDue(new Date());
+		note2.setHeadline("test2");
+		note2.setLastEdited(new Date());
+		note2.setRelevance(Relevance.NORMAL);
+		entityManager.persist(note2);
 		
 		/*
 		Permission edit = new Permission();
@@ -90,16 +115,14 @@ public class StartupBean {
 //		entityManager.persist(adminRole);
 //		
 		Set<Role> adminRoles = user1.getRoles();
-		Set<User> roleUsers = adminRole.getUsers();
-		roleUsers.add(user1);
-
-		adminRole.setUsers(roleUsers);
-		entityManager.persist(adminRole);
-		
 		adminRoles.add(adminRole);
 //		
 		user1.setRoles(adminRoles);
-		entityManager.persist(user1);
+		
+		Set<Note> userNotes = user1.getNotes();
+		userNotes.add(note1);
+		userNotes.add(note2);
+		//entityManager.merge(user1);
 //		
 	}
 	

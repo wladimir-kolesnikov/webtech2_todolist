@@ -35,10 +35,11 @@ public class Role extends BaseEntity {
 	private Set<Permission> permissions;
 	*/
 	
-	
+	/*
 	@ManyToMany(fetch=FetchType.EAGER, mappedBy="roles")
 	// Die den Roles zugeteilten User. Mehrere Roles können mehrere User beinhalten
 	private Set<User> users;
+	*/
 
 	public String getRoleName() {
 		return roleName;
@@ -60,6 +61,7 @@ public class Role extends BaseEntity {
 	}
 	*/
 
+	/*
 	public Set<User> getUsers() {
 		return users;
 	}
@@ -67,6 +69,7 @@ public class Role extends BaseEntity {
 	public void setUsers(Set<User> users) {
 		this.users = users;
 	}
+	*/
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
