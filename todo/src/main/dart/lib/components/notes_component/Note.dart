@@ -32,21 +32,19 @@ class Note {
     newNote.id = _toInt(note['id']);
     newNote.headline = note['headline'];
     newNote.author = note['author'];
-    newNote.created = DateTime.parse(note['created']);
+    //newNote.created = DateTime.parse(note['createdString']);
     //print(note['created']);
     //print(parseDateTimetoDate(note['created']));
-    //newNote.created = parseDateTimetoDate(note['created']);
-    newNote.lastEdited = DateTime.parse(note['lastEdited']);
-    //newNote.lastEdited = parseDateTimetoDate(note['lastEdited']);
-    newNote.due = DateTime.parse(note['due']);
-    //newNote.due = parseDateTimetoDate(note['due']);
+    newNote.created = parseDateTimetoDate(note['created']);
+    //newNote.lastEdited = DateTime.parse(note['lastEditedString']);
+    newNote.lastEdited = parseDateTimetoDate(note['lastEdited']);
+    //newNote.due = DateTime.parse(note['dueString']);
+    newNote.due = parseDateTimetoDate(note['due']);
     newNote.relevance = enumFromString(note['relevance']);
     newNote.content = note['content'];
 
     return newNote;
   }
-
-
 
   String DateTimeToJson(DateTime dt){
       String dateString = dt.toString();
@@ -80,13 +78,13 @@ class Note {
     print(enumString);
     Relevance rEnum;
     switch(enumString){
-      case 'Relevance.NORMAL' :
+      case 'NORMAL' :
         rEnum = Relevance.NORMAL;
         break;
-      case 'Relevance.IMPORTANT' :
+      case 'IMPORTANT' :
         rEnum = Relevance.IMPORTANT;
         break;
-      case 'Relevance.URGENT' :
+      case 'URGENT' :
         rEnum = Relevance.URGENT;
         break;
       default:
@@ -103,10 +101,15 @@ class Note {
 
   }
 
-  DateTime parseDateTimetoDate(String dtS){
-    DateTime dt = DateTime.parse(dtS);
-    var formatter = new DateFormat('yyyy-MM-dd');
-    String formatted = formatter.format(dt);
-    print(formatted);
-    return DateTime.parse(formatted);
+DateTime parseDateTimetoDate(List<String> dtS){
+  //dtS = dtS.toString();
+  print(dtS);
+  //String dateString = dtS[0].toString() + "-" + dtS[1].toString() + "-" + dtS[2].toString();
+  if(_toInt(dtS[1]) < 10){
+    dtS[1] = "0"+dtS[1].toString();
   }
+  String dateString = dtS[0].toString() + dtS[1].toString() + dtS[2].toString();
+  print(dateString);
+
+  return DateTime.parse(dateString);
+}

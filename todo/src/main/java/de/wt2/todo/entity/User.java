@@ -1,5 +1,6 @@
 package de.wt2.todo.entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
@@ -28,7 +29,7 @@ public class User extends BaseEntity {
 	private String password;
 	
 	// Registrierungsdatum
-	private Date joined;
+	private LocalDate joined;
 	
 	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(
@@ -51,11 +52,11 @@ public class User extends BaseEntity {
 		this.username = username;
 	}
 
-	public Date getJoined() {
+	public LocalDate getJoined() {
 		return joined;
 	}
 
-	public void setJoined(Date joined) {
+	public void setJoined(LocalDate joined) {
 		this.joined = joined;
 	}
 

@@ -6,7 +6,7 @@
 <div>
     <div class="detailsLabel">
         <p>Username:</p>
-        <p>Password:</p>
+        <!--p>Password:</p-->
         <p>Joined:</p>
         <p>Roles:</p>
     </div>
@@ -15,7 +15,7 @@
     <div class="detailsInformation">
         <!--p>{{currentUser.id}}</p-->
         <p>{{currentUser.username}}</p>
-        <p>{{currentUser.password}}</p>
+        <!--p>{{currentUser.password}}</p-->
         <p>{{dateTimeToDateString(currentUser.joined)}}</p>
         <div *ngFor="let role of currentUser.roles">
             <p>{{roleToString(role)}}</p>
