@@ -1,5 +1,6 @@
 package de.wt2.todo.entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -22,14 +23,14 @@ public class Note extends BaseEntity {
 	private String headline;
 	
 	// Erstellt am
-	private Date created;
+	private LocalDate created;
 	
 	// Zuletzt editiert
 	@Column(name="last_edited")
-	private Date lastEdited;
+	private LocalDate lastEdited;
 	
 	// Wann läuft die Note aus
-	private Date due;
+	private LocalDate due;
 	
 	@Enumerated(EnumType.STRING)
 	/*
@@ -55,27 +56,27 @@ public class Note extends BaseEntity {
 		this.headline = headline;
 	}
 
-	public Date getCreated() {
+	public LocalDate getCreated() {
 		return created;
 	}
 
-	public void setCreated(Date created) {
+	public void setCreated(LocalDate created) {
 		this.created = created;
 	}
 
-	public Date getLastEdited() {
+	public LocalDate getLastEdited() {
 		return lastEdited;
 	}
 
-	public void setLastEdited(Date lastEdited) {
+	public void setLastEdited(LocalDate lastEdited) {
 		this.lastEdited = lastEdited;
 	}
 
-	public Date getDue() {
+	public LocalDate getDue() {
 		return due;
 	}
 
-	public void setDue(Date due) {
+	public void setDue(LocalDate due) {
 		this.due = due;
 	}
 
