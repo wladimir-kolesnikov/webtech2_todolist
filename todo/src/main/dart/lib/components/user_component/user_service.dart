@@ -72,7 +72,7 @@ class UserService{
   //Passwort mit dem des Userobjekts übereinstimmt
   Future<User> loginUser(String username, String password) async {
     List<User> userList = await getUserList();
-
+/*
     for(int i = 0; i < userList.length; i++){
       if(userList[i].username == username){
         if(userList[i].password == password){
@@ -83,6 +83,7 @@ class UserService{
         }
       }
     }
+    */
     return null;
   }
 
