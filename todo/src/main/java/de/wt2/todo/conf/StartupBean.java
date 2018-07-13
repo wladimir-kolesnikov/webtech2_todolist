@@ -1,5 +1,6 @@
 package de.wt2.todo.conf;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,7 +24,7 @@ import de.wt2.todo.entity.User;
 
 /*
  * startup() Methode wird jedes Mal beim Starten und 
- * shutdown() Methode jedes mal beim Beenden des Servers ausgeführt 
+ * shutdown() Methode jedes mal beim Beenden des Servers ausgefÃ¼hrt 
  *
  */
 @Singleton
@@ -41,7 +42,7 @@ public class StartupBean {
 	
 	/*
 	 * Erstellt zum Testen User in der Datenbank
-	 * Kann/Muss verändert werden
+	 * Kann/Muss verÃ¤ndert werden
 	 */
 	private void createUsers() {
 		
@@ -52,7 +53,7 @@ public class StartupBean {
 		
 		User user1 = new User();
 		user1.setUsername("Student_1");
-		user1.setJoined(new Date());
+		user1.setJoined(LocalDate.now());
 		String pass = ps.encryptPassword("test1");
 		user1.setPassword(pass);
 		
@@ -62,13 +63,13 @@ public class StartupBean {
 		
 		User user2 = new User();
 		user2.setUsername("Student_2");
-		user2.setJoined(new Date());
+		user2.setJoined(LocalDate.now());
 		pass = ps.encryptPassword("test2");
 		user2.setPassword(pass);
 
 		User user3 = new User();
 		user3.setUsername("Student_3");
-		user3.setJoined(new Date());
+		user3.setJoined(LocalDate.now());
 		pass = ps.encryptPassword("test3");
 		user3.setPassword(pass);
 
@@ -84,19 +85,19 @@ public class StartupBean {
 		
 		Note note1 = new Note();
 		note1.setAuthor(user1.getUsername());
-		note1.setCreated(new Date());
-		note1.setDue(new Date());
+		note1.setCreated(LocalDate.now());
+		note1.setDue(LocalDate.now());
 		note1.setHeadline("test");
-		note1.setLastEdited(new Date());
+		note1.setLastEdited(LocalDate.now());
 		note1.setRelevance(Relevance.IMPORTANT);
 		entityManager.persist(note1);
 		
 		Note note2 = new Note();
 		note2.setAuthor(user1.getUsername());
-		note2.setCreated(new Date());
-		note2.setDue(new Date());
+		note2.setCreated(LocalDate.now());
+		note2.setDue(LocalDate.now());
 		note2.setHeadline("test2");
-		note2.setLastEdited(new Date());
+		note2.setLastEdited(LocalDate.now());
 		note2.setRelevance(Relevance.NORMAL);
 		entityManager.persist(note2);
 		
@@ -141,3 +142,4 @@ public class StartupBean {
 	}
 
 }
+
