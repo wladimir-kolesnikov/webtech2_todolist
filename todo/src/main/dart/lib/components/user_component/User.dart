@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:intl/intl.dart';
-import 'package:todo/component/user_component/RoleClass.dart';
+import 'package:todo/components/user_component/RoleClass.dart';
 
 //User Klasse als Datenstruktur für User Entität und Helferfunktionen für JSON
 class User{

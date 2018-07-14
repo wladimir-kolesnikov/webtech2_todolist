@@ -34,14 +34,15 @@ class UserService{
 
   //POST
   //Fügt einen neuen User hinzu
-  Future addUser(User user) async {
+    Future addUser(User user, String password) async {
     try{
       //final response = await inMemoryDatabaseService.post('api/users', headers: {'Conent-Type':'applicaton/json'},
       //    body: JSON.encode(user.toJson()));
       //URL anpassen
-    final response = await _http.post('api/users', headers: {'Content-Type':'application/json'},
-        body: JSON.encode(user.toJson()));
 
+    final response = await _http.post('api/users', headers: {'Content-Type':'application/json'},
+        body: JSON.encode(user.toJson(password)));
+      //print(JSON.encode(user.toJson(password)));
     }
     catch(e){
       _handleError(e);
@@ -51,20 +52,21 @@ class UserService{
 
   //PUT
   //Updated die Daten eines bestimmten Users
-  Future updateUser(User user) async {
+    Future updateUser(User user, String password) async {
     int id = user.id;
     try{
       //final response = await inMemoryDatabaseService.put('api/users/$id', headers: {'Content-Type':'application/json'},
       //    body:JSON.encode(user.toJson()));
       //URL anpassen
-      final response = await _http.put('api/users/$id', headers: {'Content-Type':'application/json'},
-          body:JSON.encode(user.toJson()));
 
+      final response = await _http.put('api/users/$id', headers: {'Content-Type':'application/json'},
+          body:JSON.encode(user.toJson(password)));
+      //(JSON.encode(user.toJson(password)));
     }
     catch(e){
       _handleError(e);
     }
-  }
+    }
 
 
   //umschreiben um mit Server zu interagieren

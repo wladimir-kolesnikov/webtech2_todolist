@@ -18,6 +18,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.shiro.authc.credential.DefaultPasswordService;
+import org.apache.shiro.authc.credential.PasswordService;
+
 import de.wt2.todo.entity.Note;
 import de.wt2.todo.entity.User;
 import de.wt2.todo.entity.User_;
@@ -39,6 +42,17 @@ public class UserResource extends BaseResource<User> {
 		Query q = entityManager.createQuery(query);
 		return q.getResultList();
 	}
+	
+	@Override
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public User create(final User user) {
+        PasswordService ps = new DefaultPasswordService();
+        user.setPassword(ps.encryptPassword(user.getPassword()));
+        entityManager.persist(user);
+        return user;
+    }
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -76,14 +90,15 @@ public class UserResource extends BaseResource<User> {
         return t;
     }
 	
-	@PUT
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/{userID}")
-	public User update(final User user, @PathParam("userID") long userID) {
-		User thisUser = entityManager.find(User.class, userID);
-		thisUser.setPassword(user.getPassword());
-		entityManager.merge(thisUser);
-		return thisUser;
-	}
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{userID}")
+    public User update(final User user, @PathParam("userID") long userID) {
+        User thisUser = entityManager.find(User.class, userID);
+        PasswordService ps = new DefaultPasswordService();
+        thisUser.setPassword(ps.encryptPassword(user.getPassword()));
+        entityManager.persist(user);
+        return thisUser;
+    }
 }
