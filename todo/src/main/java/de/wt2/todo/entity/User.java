@@ -40,7 +40,7 @@ public class User extends BaseEntity {
 	// Set von Roles, die dem User zugeordnet sind (z.B. Admin, S-Mod, Guest usw.)
 	private Set<Role> roles;
 	
-	@OneToMany(fetch=FetchType.EAGER)
+	@OneToMany(fetch=FetchType.EAGER, mappedBy="authorUser")
 	// Alle Notes, die von dem User erstellt wurden
 	private Set<Note> notes;
 

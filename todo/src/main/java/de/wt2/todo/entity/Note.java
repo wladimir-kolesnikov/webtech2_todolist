@@ -2,11 +2,17 @@ package de.wt2.todo.entity;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity(name="note")
 @Table(name="note")
@@ -14,9 +20,10 @@ public class Note extends BaseEntity {
 
 	private static final long serialVersionUID = 3713677712268341918L;
 	
-	// Der Author
-	// Kein @ManyToOne weil unidirektionales Mapping
-	private String author;
+	@JsonProperty(access = Access.WRITE_ONLY)
+    @ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name="user_id")
+    private User authorUser;	
 	
 	// Die Überschrift
 	private String headline;
@@ -41,12 +48,12 @@ public class Note extends BaseEntity {
 	 */
 	private Relevance relevance;
 
-	public String getAuthor() {
-		return author;
+	public User getAuthorUser() {
+		return authorUser;
 	}
 
-	public void setAuthor(String author) {
-		this.author = author;
+	public void setAuthorUser(User authorUser) {
+		this.authorUser = authorUser;
 	}
 
 	public String getHeadline() {

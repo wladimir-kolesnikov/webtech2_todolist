@@ -65,13 +65,19 @@ public class StartupBean {
 		user2.setJoined(LocalDate.now());
 		pass = ps.encryptPassword("test2");
 		user2.setPassword(pass);
-
+		
+		user2.setRoles(new HashSet<Role>());
+		user2.setNotes(new HashSet<Note>());
+		
 		User user3 = new User();
 		user3.setUsername("Student_3");
 		user3.setJoined(LocalDate.now());
 		pass = ps.encryptPassword("test3");
 		user3.setPassword(pass);
-
+		
+		user3.setRoles(new HashSet<Role>());
+		user3.setNotes(new HashSet<Note>());
+		
 		entityManager.persist(user1);
 		entityManager.persist(user2);
 		entityManager.persist(user3);
@@ -81,9 +87,12 @@ public class StartupBean {
 		HashSet<User> users = new HashSet<User>();
 		entityManager.persist(adminRole);
 		
+		Role userRole = new Role();
+		userRole.setRoleName("user");
+		entityManager.persist(userRole);
 		
 		Note note1 = new Note();
-		note1.setAuthor(user1.getUsername());
+		note1.setAuthorUser(user1);
 		note1.setCreated(LocalDate.now());
 		note1.setDue(LocalDate.now());
 		note1.setHeadline("test");
@@ -93,7 +102,7 @@ public class StartupBean {
 		entityManager.persist(note1);
 		
 		Note note2 = new Note();
-		note2.setAuthor(user1.getUsername());
+		note2.setAuthorUser(user1);
 		note2.setCreated(LocalDate.now());
 		note2.setDue(LocalDate.now());
 		note2.setHeadline("test2");
@@ -129,6 +138,9 @@ public class StartupBean {
 		adminRoles.add(adminRole);
 //		
 		user1.setRoles(adminRoles);
+		
+		Set<Role> userRoles = user2.getRoles();
+		userRoles.add(userRole);
 		
 		Set<Note> userNotes = user1.getNotes();
 		userNotes.add(note1);

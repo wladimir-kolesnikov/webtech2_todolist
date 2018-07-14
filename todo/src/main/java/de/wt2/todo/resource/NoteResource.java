@@ -27,4 +27,5 @@ public class NoteResource extends BaseResource<Note> {
 		Query q = entityManager.createQuery(query);
 		return q.getResultList();
 	}
+
 }

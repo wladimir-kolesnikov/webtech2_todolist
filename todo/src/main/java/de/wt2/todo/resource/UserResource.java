@@ -10,6 +10,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -43,7 +44,10 @@ public class UserResource extends BaseResource<User> {
 		return q.getResultList();
 	}
 	
-	@Override
+	/*
+	 * Erstellt einen neuen Benutzer. 
+	 * Das Password wird encrypted in der Datenbank gespeichert
+	 */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -57,48 +61,86 @@ public class UserResource extends BaseResource<User> {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{userID}/notes")
-	public List<Note> findAll(@PathParam("userID") long id) {
-		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-		CriteriaQuery cq = cb.createQuery(Note.class);
-		Root<User> user = cq.from(User.class);
+	public List<Note> findAll(@PathParam("userID") long userID) {
+		
+		/*
+		 * Einfach auskommentieren, falls man die Berechtigung doch einschränken will
+		 */
+//		if (isAllowed(userID)) {
+			CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+			CriteriaQuery cq = cb.createQuery(Note.class);
+			Root<User> user = cq.from(User.class);
 
-		//Join<User, Note> notes = user.join(User_.notes);
-		cq.where(user.get(User_.id).in(id));
-		cq.select(user.get(User_.notes));
-		TypedQuery<Note> tq = entityManager.createQuery(cq);
-		return tq.getResultList();
+			//Join<User, Note> notes = user.join(User_.notes);
+			cq.where(user.get(User_.id).in(userID));
+			cq.select(user.get(User_.notes));
+			TypedQuery<Note> tq = entityManager.createQuery(cq);
+			return tq.getResultList();
+//		} else {
+//			return null;
+//		}
 	}
 	
+	/*
+	 * Erstellt eine Note für den entsprechenden User
+	 * 
+	 */
 	@POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{userID}/notes")
     public Note create(final Note t, @PathParam("userID") long userID) {
-        entityManager.persist(t);
-        User user = entityManager.find(User.class, userID);
-        user.getNotes().add(t);
-        entityManager.merge(user);
-        return t;
+		if (isAllowed(userID)) {
+			  entityManager.persist(t);
+		        User user = entityManager.find(User.class, userID);
+		        user.getNotes().add(t);
+		        entityManager.merge(user);
+		        return t;
+		} else return null;
     }
 
+
+	/*
+	 * Updated eine Note, z.B. wenn die Relevance oder das Datum geändert wird
+	 */
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{userID}/notes/{noteID}")
-    public Note update(final Note t) {
-        entityManager.merge(t);
-        return t;
+    public Note update(final Note t, @PathParam("userID") long userID) {
+    	if (isAllowed(userID)) {
+        	entityManager.merge(t);
+            return t;
+        } else return null;
     }
 	
+	/*
+	 * Updated einen User, z.B. wenn das Passwort geändert wird.
+	 */
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{userID}")
     public User update(final User user, @PathParam("userID") long userID) {
-        User thisUser = entityManager.find(User.class, userID);
-        PasswordService ps = new DefaultPasswordService();
-        thisUser.setPassword(ps.encryptPassword(user.getPassword()));
-        entityManager.persist(user);
-        return thisUser;
+    	if (isAllowed(userID)) {
+    		 User thisUser = entityManager.find(User.class, userID);
+    	        PasswordService ps = new DefaultPasswordService();
+    	        thisUser.setPassword(ps.encryptPassword(user.getPassword()));
+    	        entityManager.persist(user);
+    	        return thisUser;
+    	} else return null;
+    }
+    
+    /*
+     * Löscht eine Note eines Users
+     */
+	@DELETE
+    @Path("/{userID}/notes/{noteID}")
+    public void delete(@PathParam("userID") long userID, @PathParam("noteID") long noteID) {
+		if (isAllowed(userID)) {
+	        Note toDelete = entityManager.find(Note.class, noteID);
+	        toDelete.setAuthorUser(null);
+	        entityManager.remove(toDelete);
+		}
     }
 }

@@ -45,6 +45,7 @@ public class LoginResource {
 	    try {
 		    currentUser.login(token);		
 		    User user = findByName(loginBean.getUsername());
+		    currentUser.getSession().setAttribute("user", user);
 		    return user;
 	    } catch (AuthenticationException ae) {
 	    	ae.printStackTrace();

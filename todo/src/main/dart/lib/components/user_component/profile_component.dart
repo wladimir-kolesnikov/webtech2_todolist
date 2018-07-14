@@ -38,7 +38,7 @@ class ProfileComponent implements OnInit{
   Future updateUser(String password) async {
       currentUser.password = password;
 
-      await userService.updateUser(currentUser);
+      await userService.updateUser(currentUser, password);
       userList = await userService.getUserList();
       cancelEditing();
 
