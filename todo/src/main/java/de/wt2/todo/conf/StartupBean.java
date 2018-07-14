@@ -1,7 +1,6 @@
 package de.wt2.todo.conf;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -90,6 +89,7 @@ public class StartupBean {
 		note1.setHeadline("test");
 		note1.setLastEdited(LocalDate.now());
 		note1.setRelevance(Relevance.IMPORTANT);
+		note1.setContent("TEST FOR NOTE1");
 		entityManager.persist(note1);
 		
 		Note note2 = new Note();
@@ -99,6 +99,7 @@ public class StartupBean {
 		note2.setHeadline("test2");
 		note2.setLastEdited(LocalDate.now());
 		note2.setRelevance(Relevance.NORMAL);
+		note2.setContent("TEST FOR NOTE2");
 		entityManager.persist(note2);
 		
 		/*

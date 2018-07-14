@@ -1,7 +1,6 @@
 package de.wt2.todo.entity;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,6 +30,8 @@ public class Note extends BaseEntity {
 	
 	// Wann läuft die Note aus
 	private LocalDate due;
+	
+	private String content;
 	
 	@Enumerated(EnumType.STRING)
 	/*
@@ -90,5 +91,13 @@ public class Note extends BaseEntity {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 }

@@ -65,10 +65,9 @@ class LoginComponent implements OnInit {
 
     currentUser = await loginService.login(username, password);
 
-    if( currentUser != null) {
+    if(currentUser != null) {
       loginAccepted = true;
     }
-
   }
 
 

@@ -42,11 +42,53 @@ class InMemoryDatabaseService extends MockClient {
           data = mockNotesList[int.parse(request.url.pathSegments[2])];
         }
         else if(request.url.pathSegments.contains('users')){
+          /*
           data = mockUserList;
+          */
+
+          data = [ {
+            "id" : 1,
+            "username" : "Student_1",
+            "joined" : [ 2018, 7, 13 ],
+            "roles" : [ {
+              "id" : 1,
+              "roleName" : "admin"
+            } ],
+            "notes" : [ {
+              "id" : 1,
+              "author" : "Student_1",
+              "headline" : "test",
+              "created" : [ 2018, 7, 13 ],
+              "lastEdited" : [ 2018, 7, 13 ],
+              "due" : [ 2018, 7, 13 ],
+              "relevance" : "IMPORTANT"
+            }, {
+              "id" : 2,
+              "author" : "Student_1",
+              "headline" : "test2",
+              "created" : [ 2018, 7, 13 ],
+              "lastEdited" : [ 2018, 7, 13 ],
+              "due" : [ 2018, 7, 13 ],
+              "relevance" : "NORMAL"
+            } ]
+          }, {
+            "id" : 2,
+            "username" : "Student_2",
+            "joined" : [ 2018, 7, 13 ],
+            "roles" : [ ],
+            "notes" : [ ]
+          }, {
+            "id" : 3,
+            "username" : "Student_3",
+            "joined" : [ 2018, 7, 13 ],
+            "roles" : [ ],
+            "notes" : [ ]
+          } ];
         }
         break;
       case 'POST' :
         if(request.url.pathSegments.contains('notes')) {
+
           var author = JSON.decode(request.body)['author'];
           var headline = JSON.decode(request.body) ['headline'];
           var created = JSON.decode(request.body) ['created'];
@@ -56,19 +98,24 @@ class InMemoryDatabaseService extends MockClient {
           var content = JSON.decode(request.body) ['content'];
           var id = nextNotesID++;
 
+          DateTime dateTimeDue = parseDateTimetoDate(due);
+          DateTime dateTimeCreated = parseDateTimetoDate(lastEdited);
+          DateTime dateTimeLastEdited = parseDateTimetoDate(lastEdited);
+
+          Relevance transformedRelevance = enumFromString(relevance);
+
           Note newNote = new Note();
           newNote.author = author;
           newNote.headline = headline;
-          newNote.created = created;
-          newNote.lastEdited = lastEdited;
-          newNote.due = due;
-          newNote.relevance = relevance;
+          newNote.created = dateTimeCreated;
+          newNote.lastEdited = dateTimeLastEdited;
+          newNote.due = dateTimeDue;
+          newNote.relevance = transformedRelevance;
           newNote.id = id;
           newNote.content = content;
 
-          print(mockNotesList.length);
           mockNotesList[int.parse(request.url.pathSegments[2])].add(newNote);
-          print(mockNotesList.length);
+
           data = newNote;
         }
 
@@ -81,7 +128,7 @@ class InMemoryDatabaseService extends MockClient {
 
           User newUser = new User();
           newUser.username = username;
-          newUser.password = password;
+          //newUser.password = password;
           newUser.joined = joined;
           newUser.roles = roles;
           newUser.id = id;
@@ -110,7 +157,7 @@ class InMemoryDatabaseService extends MockClient {
           User userChanges = new User.fromJason(JSON.decode(request.body));
           User targetUser = mockUserList.firstWhere((user) => user.id == userChanges.id);
 
-          targetUser.password = userChanges.password;
+          //targetUser.password = userChanges.password;
 
           data = targetUser;
         }
@@ -126,7 +173,7 @@ class InMemoryDatabaseService extends MockClient {
     }
 
     Response response = new Response(JSON.encode({'data' : data }), 200,
-        headers: {'content-type' : 'application/json'});
+        headers: {'Content-type' : 'application/json'});
 
     return response;
   }
@@ -180,7 +227,7 @@ List<User> getUsers(){
   User user1 = new User();
   user1.id = 0;
   user1.username = "user1";
-  user1.password = "password1";
+  //user1.password = "password1";
   user1.joined = new DateTime.now();
   user1.roles = new Set<Role>();
   user1.roles.add(Role.USER);
@@ -190,7 +237,7 @@ List<User> getUsers(){
   User user2 = new User();
   user2.id = 1;
   user2.username = "user2";
-  user2.password = "password2";
+  //user2.password = "password2";
   user2.joined = new DateTime.now();
   user2.roles = new Set<Role>();
   user2.roles.add(Role.ADMIN);
@@ -200,4 +247,33 @@ List<User> getUsers(){
 
   return newList;
 
+}
+
+DateTime parseDateTimetoDate(String dtS){
+  DateTime dt = DateTime.parse(dtS);
+  var formatter = new DateFormat('yyyy-MM-dd');
+  String formatted = formatter.format(dt);
+  print(formatted);
+  return DateTime.parse(formatted);
+}
+
+Relevance enumFromString(String enumString){
+  print(enumString);
+  Relevance rEnum;
+  switch(enumString){
+    case 'Relevance.NORMAL' :
+      rEnum = Relevance.NORMAL;
+      break;
+    case 'Relevance.IMPORTANT' :
+      rEnum = Relevance.IMPORTANT;
+      break;
+    case 'Relevance.URGENT' :
+      rEnum = Relevance.URGENT;
+      break;
+    default:
+      rEnum = null;
+      break;
+  }
+  rEnum.toString();
+  return rEnum;
 }

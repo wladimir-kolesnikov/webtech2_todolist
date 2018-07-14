@@ -39,7 +39,7 @@ class UserService{
       //final response = await inMemoryDatabaseService.post('api/users', headers: {'Conent-Type':'applicaton/json'},
       //    body: JSON.encode(user.toJson()));
       //URL anpassen
-    final response = await _http.post('api/users', headers: {'Conent-Type':'applicaton/json'},
+    final response = await _http.post('api/users', headers: {'Content-Type':'application/json'},
         body: JSON.encode(user.toJson()));
 
     }
@@ -106,4 +106,4 @@ Exception _handleError(dynamic e){
 }
 
 //Dekodierung der JSON response
-dynamic _extractData(Response resp) => JSON.decode(resp.body)['data'];
+dynamic _extractData(Response resp) => JSON.decode(resp.body);

@@ -78,7 +78,7 @@ class NotesService {
     //final response = await inMemoryDatabaseService.put('api/users/$id/notes/$NoteID', headers: {'Conent-Type':'applicaton/json'},
     //    body: JSON.encode(note.toJson()));
     //URL anpassen
-    final response = await _http.put('api/users/$id/notes/$NoteID', headers: {'Conent-Type':'applicaton/json'},
+    final response = await _http.put('api/users/$id/notes/$NoteID', headers: {'Content-Type':'application/json'},
             body: JSON.encode(note.toJson()));
     final returnNote = new Note.fromJson(_extractData(response));
     return returnNote;
@@ -90,7 +90,7 @@ class NotesService {
  }
 
  //Dekodierung der JSON response
-  dynamic _extractData(Response resp) => JSON.decode(resp.body)['data'];
+  dynamic _extractData(Response resp) => JSON.decode(resp.body);
 
   //Error handling
   Exception _handleError(dynamic e){

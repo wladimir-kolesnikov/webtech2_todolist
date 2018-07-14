@@ -39,12 +39,9 @@
     </form>
     <button class="normalButtons" (click)="register(usernameRegister.value, passwordRegister.value)">Submit</button>
     <button class="normalButtons" (click)="cancelRegistration()">Cancel</button>
-
 </div>
 
 
 <div *ngIf="loginAccepted == true">
-
     <nav-comp [currentUser]="currentUser"></nav-comp>
-
 </div>

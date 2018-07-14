@@ -19,7 +19,7 @@ class LoginService{
       lb.username = username;
       lb.password = password;
 
-      final response = await _http.post('api/login', headers: {'Conent-Type':'applicaton/json'},
+      final response = await _http.post('api/login', headers: {'Content-Type':'application/json'},
           body: JSON.encode(lb.toJson()));
       final user = new User.fromJason(_extractData(response));
 
@@ -29,7 +29,6 @@ class LoginService{
 
     }
   }
-
 }
 
 Exception _handleError(dynamic e){
@@ -38,7 +37,7 @@ Exception _handleError(dynamic e){
 }
 
 //Dekodierung der JSON response
-dynamic _extractData(Response resp) => JSON.decode(resp.body)['data'];
+dynamic _extractData(Response resp) => JSON.decode(resp.body);
 
 bool jsonToString(String jsonString){
   jsonString = jsonString.toString();

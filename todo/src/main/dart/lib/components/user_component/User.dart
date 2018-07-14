@@ -15,14 +15,14 @@ class User{
     'username' : username,
     'joined' : joined.toString(),
     'roles' : roles.toString(),
-    'password' : password,
+    'password' : password
   };
 
   //Userobjekt wird aus einer JSON Map erstellt
   factory User.fromJason(Map<String, dynamic> user){
 
     User newUser = new User();
-    newUser.id = _toInt(user['id']);
+    newUser.id = user['id'];
     newUser.username = user['username'];
     //newUser.password = user['password'];
     //newUser.joined = DateTime.parse(user['joined']);
@@ -60,31 +60,35 @@ Role stringToEnum(String enumString){
   return rEnum;
 }
 
-//Hilfsfunktion um aus einem String eine Set zu erstellen
-Set<Role> stringToRoleSet(String setString){
-  print(setString);
-  setString = setString.toString();
-  setString = setString.replaceAll("[","");
-  setString = setString.replaceAll("]","");
-  setString = setString.replaceAll("{","");
-  setString = setString.replaceAll("}","");
-  List<String> splitString = setString.split(',');
-  print(splitString);
-
-  String roleNameSplitString = splitString[1];
-  List<String> splitStringName = roleNameSplitString.split(':');
-
-  print(splitStringName[1]);
+Set<Role> stringToRoleSet(List<String> stringList) {
   Set<Role> roleSet = new Set<Role>();
-  /*
+  if(stringList.isEmpty){
+    return roleSet;
+  } else {
+    String setString = stringList.toString();
+    print(setString);
+    setString = setString.toString();
+    setString = setString.replaceAll("[", "");
+    setString = setString.replaceAll("]", "");
+    setString = setString.replaceAll("{", "");
+    setString = setString.replaceAll("}", "");
+    List<String> splitString = setString.split(',');
+    print(splitString);
+
+    String roleNameSplitString = splitString[1];
+    List<String> splitStringName = roleNameSplitString.split(':');
+
+    print(splitStringName[1]);
+    /*
   for(int i = 0; i < splitString.length; i++){
     roleSet.add(stringToEnum(splitString[i]));
   }
   */
 
-  roleSet.add(stringToEnum(splitStringName[1]));
+    roleSet.add(stringToEnum(splitStringName[1]));
 
-  return roleSet;
+    return roleSet;
+  }
 }
 
 
@@ -95,7 +99,7 @@ DateTime parseDateTimetoDate(List<String> dtS){
   //dtS = dtS.toString();
   print(dtS);
   //String dateString = dtS[0].toString() + "-" + dtS[1].toString() + "-" + dtS[2].toString();
-  if(_toInt(dtS[1]) < 10){
+  if(int.parse(dtS[1].toString()) < 10){
     dtS[1] = "0"+dtS[1].toString();
   }
   String dateString = dtS[0].toString() + dtS[1].toString() + dtS[2].toString();
