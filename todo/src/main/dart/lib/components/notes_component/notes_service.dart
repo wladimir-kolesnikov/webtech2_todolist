@@ -59,7 +59,7 @@ class NotesService {
      //final response = await inMemoryDatabaseService.post('api/users/$id/notes', headers: {'Conent-Type':'applicaton/json'},
      //    body: JSON.encode(note.toJson()));
      //URL anpassen
-     final response = await _http.post('api/users/$id/notes', headers: {'Conent-Type':'applicaton/json'},
+     final response = await _http.post('api/users/$id/notes', headers: {'Content-Type':'application/json'},
               body: JSON.encode(note.toJson()));
      final returnNote = new Note.fromJson(_extractData(response));
      return returnNote;
