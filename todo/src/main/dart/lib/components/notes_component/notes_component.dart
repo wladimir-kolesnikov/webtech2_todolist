@@ -72,8 +72,12 @@ class NotesComponent implements OnInit{
   }
 
   //Nach dem Drücken auf den Submitbutton wird die entsprechende Note mit den übergebenen Informationen geupdated
-  Future updateNote(DateTime dueDate, String headline, Relevance relevance, String content ) async{
-    selectedNote.author = "thisProfile";
+  Future updateNote(String dueDateStr, String headline, String relevanceStr, String content ) async{
+    
+    DateTime dueDate = parseDateTimetoDate(dueDateStr);
+    Relevance relevance = enumFromString(relevanceStr);
+    
+    selectedNote.author = selectedNote.author;
     selectedNote.created = new DateTime.now();
     DateTime newDueDate = DateTime.parse(dueDate.toString());
     selectedNote.due = newDueDate;
@@ -104,7 +108,11 @@ class NotesComponent implements OnInit{
 
 
   //Nach dem Drücken des Submitbuttons wird eine neue Note mit den entsprechenden Daten erzeugt
-  Future submitAddForm(DateTime dueDate, String headline, Relevance relevance, String content) async{
+ Future submitAddForm(String dueDateStr, String headline, String relevanceStr, String content) async{
+   
+    DateTime dueDate = parseDateTimetoDate(dueDateStr);
+    Relevance relevance = enumFromString(relevanceStr);
+   
     Note newNote = new Note();
     newNote.author = "thisProfile";
     newNote.created = new DateTime.now();
@@ -171,6 +179,27 @@ class NotesComponent implements OnInit{
         return "Urgent";
         break;
     }
+  }
+  
+  Relevance enumFromString(String enumString){
+    print(enumString);
+    Relevance rEnum;
+    switch(enumString){
+      case 'Relevance.NORMAL' :
+        rEnum = Relevance.NORMAL;
+        break;
+      case 'Relevance.IMPORTANT' :
+        rEnum = Relevance.IMPORTANT;
+        break;
+      case 'Relevance.URGENT' :
+        rEnum = Relevance.URGENT;
+        break;
+      default:
+        rEnum = null;
+        break;
+    }
+    rEnum.toString();
+    return rEnum;
   }
 
 }
