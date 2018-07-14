@@ -1,3 +1,7 @@
+import 'dart:convert';
+import 'package:intl/intl.dart';
+import 'package:todo/component/user_component/RoleClass.dart';
+
 //User Klasse als Datenstruktur für User Entität und Helferfunktionen für JSON
 class User{
 
@@ -13,8 +17,8 @@ class User{
   Map toJson(String password) => {
     'id' : id,
     'username' : username,
-    'joined' : joined.toString(),
-    'roles' : roles.toString(),
+    'joined' : dateTimeToDateString(joined),
+    'roles' : makeSetOfRoleClass(roles),
     'password' : password
   };
 
@@ -60,6 +64,36 @@ Role stringToEnum(String enumString){
   return rEnum;
 }
 
+String rolesToString(Set<Role> roles){
+  String finalString = "";
+  for(int i = 0; i < roles.length; i++){
+    Role role = roles.elementAt(i);
+    finalString = finalString + roleToString(role);
+  }
+  return finalString;
+}
+
+String roleToString(Role role){
+  String roleString;
+  print(role);
+  switch(role){
+    case Role.ADMIN:
+      roleString = 'admin';
+      break;
+    case Role.SUPERMOD:
+      roleString = 'supermod';
+      break;
+    case Role.USER :
+      roleString = 'user';
+      break;
+    default:
+      roleString = null;
+      break;
+  }
+  print(roleString);
+  return roleString;
+}
+
 Set<Role> stringToRoleSet(List<String> stringList) {
   Set<Role> roleSet = new Set<Role>();
   if(stringList.isEmpty){
@@ -91,8 +125,32 @@ Set<Role> stringToRoleSet(List<String> stringList) {
   }
 }
 
+String dateTimeToDateString(DateTime dt){
+  var formatter = new DateFormat('yyyy-MM-dd');
+  String formatted = formatter.format(dt);
+  return formatted;
+}
 
+List<Map> makeSetOfRoleClass(Set<Role> rolesEnum){
+  //String finalString = "";
+  List<Map> finalRoleSet = new List<Map>();
+  for(int i = 0; i < rolesEnum.length; i++){
+    Role role = rolesEnum.elementAt(i);
+    RoleClass roleClass = new RoleClass();
+    roleClass.roleName = roleToString(role);
+    roleClass.id = 1;
+    Map roleMap = roleClass.toJson();
+    print(finalRoleSet);
+    print(roleClass);
+    finalRoleSet.add(roleMap);
+    print("check");
+    print(finalRoleSet);
 
+    var test = JSON.encode(finalRoleSet);
+    print(test);
+  }
+  return finalRoleSet;
+}
 
 
 DateTime parseDateTimetoDate(List<String> dtS){
@@ -108,9 +166,5 @@ DateTime parseDateTimetoDate(List<String> dtS){
   return DateTime.parse(dateString);
 }
 
-String dateTimeToDateString(DateTime dt){
-  var formatter = new DateFormat('dd-MM-yyyy');
-  String formatted = formatter.format(dt);
-  return formatted;
-}
+int _toInt(id) => id is int ? id : int.parse(id);
 
