@@ -75,4 +75,15 @@ public class UserResource extends BaseResource<User> {
         entityManager.merge(t);
         return t;
     }
+	
+	@PUT
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{userID}")
+	public User update(final User user, @PathParam("userID") long userID) {
+		User thisUser = entityManager.find(User.class, userID);
+		thisUser.setPassword(user.getPassword());
+		entityManager.merge(thisUser);
+		return thisUser;
+	}
 }
