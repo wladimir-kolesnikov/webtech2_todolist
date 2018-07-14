@@ -19,17 +19,17 @@ class Note {
     'id' : id,
     'author' : author,
     'headline' : headline,
-    'created' : DateTimeToJson(created),
-    'lastEdited' : DateTimeToJson(lastEdited),
-    'due' : DateTimeToJson(due),
-    'relevance' : relevance.toString(),
+    'created' : dateTimeToDateString(created),
+    'lastEdited' : dateTimeToDateString(lastEdited),
+    'due' : dateTimeToDateString(due),
+    'relevance' : RelevanceToJson(relevance),
     'content' : content
   };
 
   //Noteobjekt wird aus einer JSON Map erstellt
     factory Note.fromJson(Map<String, dynamic> note){
     Note newNote = new Note();
-    newNote.id = _toInt(note['id']);
+    newNote.id = note['id'];
     newNote.headline = note['headline'];
     newNote.author = note['author'];
     //newNote.created = DateTime.parse(note['createdString']);
@@ -51,19 +51,19 @@ class Note {
     return dateString;
   }
 
-  //Hilfsfunkton um Enum in einen String umzuwandeln
+ //Hilfsfunkton um Enum in einen String umzuwandeln
   String RelevanceToJson(Relevance rel){
       print(rel.toString());
       String relString;
       print(rel == Relevance.NORMAL);
     if(rel == Relevance.NORMAL){
-      relString = "Relevance.NORMAL";
+      relString = "NORMAL";
     }
     else if(rel == Relevance.IMPORTANT){
-      relString = "Relevance.IMPORTANT";
+      relString = "IMPORTANT";
     }
     else if(rel == Relevance.URGENT){
-      relString = "Relevance.URGENT";
+      relString = "URGENT";
     }
     print(relString);
     return relString;
@@ -101,11 +101,19 @@ class Note {
 
   }
 
+
+String dateTimeToDateString(DateTime dt){
+    var formatter = new DateFormat('yyyy-MM-dd');
+    String formatted = formatter.format(dt);
+    return formatted;
+  }
+
+
 DateTime parseDateTimetoDate(List<String> dtS){
   //dtS = dtS.toString();
   print(dtS);
   //String dateString = dtS[0].toString() + "-" + dtS[1].toString() + "-" + dtS[2].toString();
-  if(_toInt(dtS[1]) < 10){
+  if(int.parse(dtS[1].toString()) < 10){
     dtS[1] = "0"+dtS[1].toString();
   }
   String dateString = dtS[0].toString() + dtS[1].toString() + dtS[2].toString();
