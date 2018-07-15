@@ -35,7 +35,7 @@ class NotesComponent implements OnInit{
 
   //User ID des angemeldeten Users
   @Input()
-  int userID;
+  int user;
 
   NotesComponent(this.notesService, this.userService);
 
@@ -58,8 +58,8 @@ class NotesComponent implements OnInit{
   //Löschen einer Note und refresh der Notes Liste
   Future deleteNote(Note note) async {
     selectedNote = null;
-    notesService.deleteNote(note, userID);
-    noteList = await notesService.getNoteList(userID);
+    notesService.deleteNote(note, user.id);
+    noteList = await notesService.getNoteList(user.id);
   }
 
   //Nach dem Drücken des Hinzufügen Buttons wird die Hinzufügen Form angezeigt
@@ -86,7 +86,7 @@ class NotesComponent implements OnInit{
     selectedNote.relevance = relevance;
     selectedNote.content = content;
 
-    Note returnedNote = await notesService.updateNote(selectedNote, userID);
+    Note returnedNote = await notesService.updateNote(selectedNote, user.id);
     if(returnedNote == null){
       errorMessage ="Error when editing";
     }
@@ -96,7 +96,7 @@ class NotesComponent implements OnInit{
       cancelUpdate();
     }
     //selectedNote = null;
-    noteList = await notesService.getNoteList(userID);
+    noteList = await notesService.getNoteList(user.id);
 
   }
 
@@ -114,7 +114,7 @@ class NotesComponent implements OnInit{
     Relevance relevance = enumFromString(relevanceStr);
    
     Note newNote = new Note();
-    newNote.author = "thisProfile";
+    newNote.author = user.username;
     newNote.created = new DateTime.now();
     //DateTime newDueDate = DateTime.parse(dueDate.toString());
     newNote.due = dueDate;
@@ -123,7 +123,7 @@ class NotesComponent implements OnInit{
     newNote.relevance = relevance;
     newNote.content = content;
 
-    Note returnedNote = await notesService.addNote(newNote, userID);
+    Note returnedNote = await notesService.addNote(newNote, user.id);
     if(returnedNote == null){
       errorMessage ="Error when adding";
     }
@@ -131,7 +131,7 @@ class NotesComponent implements OnInit{
       errorMessage ="";
     }
     print(returnedNote);
-    noteList = await notesService.getNoteList(userID);
+    noteList = await notesService.getNoteList(user.id);
   }
 
   void startEditNote(){
@@ -143,14 +143,14 @@ class NotesComponent implements OnInit{
   //Nach dem Drücken des entsprechenden Buttons wird seletktiere Note dem User übergeben der in dem Eingabefeld
   //eingetragen wurde, wenn so ein User mit dem  Username existiert
   Future sendToUser(String username) async {
-    User user = await userService.findUserWithUsername(username);
-    int newUserID = user.id;
+    User foundUser = await userService.findUserWithUsername(username);
+    int newUserID = foundUser.id;
 
     await notesService.addNote(selectedNote, newUserID);
-    notesService.deleteNote(selectedNote, userID);
+    notesService.deleteNote(selectedNote, user.id);
 
     selectedNote = null;
-    noteList =  await notesService.getNoteList(userID);
+    noteList =  await notesService.getNoteList(user.id);
   }
 
   DateTime parseDateTimetoDate(String dtS){
