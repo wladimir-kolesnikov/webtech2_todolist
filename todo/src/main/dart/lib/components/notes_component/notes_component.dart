@@ -14,7 +14,7 @@ import 'package:intl/intl.dart';
   selector: 'test-comp',
   templateUrl:'notes_component.html',
   styleUrls: const ['notes_component.css'],
-  directives:  const [CORE_DIRECTIVES],
+  directives:  const [CORE_DIRECTIVES, formDirectives,],
     providers: const [NotesService, UserService]
 )
 class NotesComponent implements OnInit{
