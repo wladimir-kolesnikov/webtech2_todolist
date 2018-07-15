@@ -22,6 +22,8 @@ class LoginComponent implements OnInit {
 
   final UserService userService;
   final LoginService loginService;
+  
+  String errorMessage = "";
 
   //currentUser hält das Userobjekt nach dem anmelden und wird Angular in HTML weitergereicht
   User currentUser = null;
@@ -67,6 +69,9 @@ class LoginComponent implements OnInit {
 
     if(currentUser != null) {
       loginAccepted = true;
+    }
+    else{
+      errorMessage = "Login Failed.";
     }
   }
 
