@@ -7,7 +7,7 @@
 
 <!-- Switch, die entsprechende Componente anzeigt -->
 <div [ngSwitch]="currentPage">
-    <test-comp *ngSwitchCase = "NOTES" [userID]="currentUser.id"></test-comp>
+    <test-comp *ngSwitchCase = "NOTES" [user]="currentUser"></test-comp>
     <profile-comp *ngSwitchCase = "PROFILE" [currentUser]="currentUser"></profile-comp>
     <admin-comp *ngSwitchCase = "ADMIN"></admin-comp>
     <div *ngSwitchDefault>default</div>
