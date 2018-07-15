@@ -41,7 +41,7 @@ class NotesComponent implements OnInit{
 
   @override
   Future ngOnInit() async{
-    noteList = await notesService.getNoteList(userID);
+    noteList = await notesService.getNoteList(user.id);
   }
 
   // Nach dem drücken auf eine der Notes, werden die Details diese Note angezeigt
