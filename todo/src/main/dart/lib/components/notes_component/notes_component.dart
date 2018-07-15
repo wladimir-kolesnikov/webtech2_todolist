@@ -10,13 +10,11 @@ import 'Note.dart';
 import 'dart:async';
 import 'package:intl/intl.dart';
 
-//Notescomponent, die die Liste an Notes eines Users anzeigt, Details einer einzelnen Note präsentiert und
-//Möglichkeiten zum Hinzufügen, Löschen und Editieren bietet
 @Component(
   selector: 'test-comp',
   templateUrl:'notes_component.html',
   styleUrls: const ['notes_component.css'],
-  directives:  const [CORE_DIRECTIVES, formDirectives, ],
+  directives:  const [CORE_DIRECTIVES],
     providers: const [NotesService, UserService]
 )
 class NotesComponent implements OnInit{
@@ -36,6 +34,8 @@ class NotesComponent implements OnInit{
   //User ID des angemeldeten Users
   @Input()
   User user;
+
+  //int userID;
 
   NotesComponent(this.notesService, this.userService);
 
@@ -73,10 +73,10 @@ class NotesComponent implements OnInit{
 
   //Nach dem Drücken auf den Submitbutton wird die entsprechende Note mit den übergebenen Informationen geupdated
   Future updateNote(String dueDateStr, String headline, String relevanceStr, String content ) async{
-    
+
     DateTime dueDate = parseDateTimetoDate(dueDateStr);
     Relevance relevance = enumFromString(relevanceStr);
-    
+
     selectedNote.author = selectedNote.author;
     selectedNote.created = new DateTime.now();
     DateTime newDueDate = DateTime.parse(dueDate.toString());
@@ -108,11 +108,12 @@ class NotesComponent implements OnInit{
 
 
   //Nach dem Drücken des Submitbuttons wird eine neue Note mit den entsprechenden Daten erzeugt
- Future submitAddForm(String dueDateStr, String headline, String relevanceStr, String content) async{
-   
+  Future submitAddForm(String dueDateStr, String headline, String relevanceStr, String content) async{
+
     DateTime dueDate = parseDateTimetoDate(dueDateStr);
+
     Relevance relevance = enumFromString(relevanceStr);
-   
+
     Note newNote = new Note();
     newNote.author = user.username;
     newNote.created = new DateTime.now();
@@ -130,7 +131,6 @@ class NotesComponent implements OnInit{
     else {
       errorMessage ="";
     }
-    print(returnedNote);
     noteList = await notesService.getNoteList(user.id);
   }
 
@@ -139,16 +139,16 @@ class NotesComponent implements OnInit{
     errorMessage = "";
     formsTitle = "Edit Note";
   }
-    
+
   //Nach dem Drücken des entsprechenden Buttons wird seletktiere Note dem User übergeben der in dem Eingabefeld
   //eingetragen wurde, wenn so ein User mit dem  Username existiert
   Future sendToUser(String username) async {
-    User foundUser = await userService.findUserWithUsername(username);
-    int newUserID = foundUser.id;
+    User user = await userService.findUserWithUsername(username);
+    int newUserID = user.id;
 
     await notesService.addNote(selectedNote, newUserID);
-    notesService.deleteNote(selectedNote, user.id);
 
+    notesService.deleteNote(selectedNote, user.id);
     selectedNote = null;
     noteList =  await notesService.getNoteList(user.id);
   }
@@ -179,8 +179,9 @@ class NotesComponent implements OnInit{
         return "Urgent";
         break;
     }
+    return null;
   }
-  
+
   Relevance enumFromString(String enumString){
     print(enumString);
     Relevance rEnum;
