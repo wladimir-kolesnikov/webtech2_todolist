@@ -70,8 +70,6 @@ public class UserResource extends BaseResource<User> {
 			CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 			CriteriaQuery cq = cb.createQuery(Note.class);
 			Root<User> user = cq.from(User.class);
-
-			//Join<User, Note> notes = user.join(User_.notes);
 			cq.where(user.get(User_.id).in(userID));
 			cq.select(user.get(User_.notes));
 			TypedQuery<Note> tq = entityManager.createQuery(cq);
@@ -91,11 +89,14 @@ public class UserResource extends BaseResource<User> {
     @Path("/{userID}/notes")
     public Note create(final Note t, @PathParam("userID") long userID) {
 		if (isAllowed(userID)) {
-			  entityManager.persist(t);
-		        User user = entityManager.find(User.class, userID);
-		        user.getNotes().add(t);
-		        entityManager.merge(user);
-		        return t;
+			entityManager.persist(t);
+	        User user = entityManager.find(User.class, userID);
+	        t.setAuthorUser(user);
+	        t.setAuthor(user.getUsername());
+	        user.getNotes().add(t);
+
+	        entityManager.merge(user);
+	        return t;
 		} else return null;
     }
 

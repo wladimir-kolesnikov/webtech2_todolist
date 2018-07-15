@@ -23,6 +23,9 @@ import de.wt2.todo.entity.User;
 import de.wt2.todo.entity.User_;
 import de.wt2.todo.model.LoginBean;
 
+/*
+ * Wird für den Login benutzt
+ */
 
 @Transactional
 @Stateless
@@ -33,6 +36,12 @@ public class LoginResource {
 	@PersistenceContext
 	protected EntityManager entityManager;
 	
+	/*
+	 * Checkt, ob die gesendeten Credentials gültig sind. Falls ja, wird der user eingeloggt
+	 * und das eigene User Objekt in die Session übergeben.
+	 * Das ist nötig für weitere checks, z.B. ob ein gesendeter Request auch wirklich von dem 
+	 * in der REST API (z.B. über die ID) angegebenen User kommt
+	 */
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -48,13 +57,16 @@ public class LoginResource {
 		    currentUser.getSession().setAttribute("user", user);
 		    return user;
 	    } catch (AuthenticationException ae) {
-	    	ae.printStackTrace();
+//	    	ae.printStackTrace();
 	    	return null;
 	    }
 	}
 	
+	/*
+	 * Hilfsmethode um den User in der Datenbank anhand des usernames zu finden
+	 * Username ist immer in der DB vorhanden, da ansonst eine AuthenticationException geworfen wird
+	 */
 	private User findByName(String username) {
-		
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaQuery cq = cb.createQuery(User.class);
 		Root<User> user = cq.from(User.class);

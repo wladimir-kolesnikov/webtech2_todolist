@@ -84,7 +84,6 @@ public class StartupBean {
 		
 		Role adminRole = new Role();
 		adminRole.setRoleName("admin");
-		HashSet<User> users = new HashSet<User>();
 		entityManager.persist(adminRole);
 		
 		Role userRole = new Role();
@@ -93,6 +92,7 @@ public class StartupBean {
 		
 		Note note1 = new Note();
 		note1.setAuthorUser(user1);
+		note1.setAuthor(user1.getUsername());
 		note1.setCreated(LocalDate.now());
 		note1.setDue(LocalDate.now());
 		note1.setHeadline("test");
@@ -103,6 +103,7 @@ public class StartupBean {
 		
 		Note note2 = new Note();
 		note2.setAuthorUser(user1);
+		note2.setAuthor(user1.getUsername());
 		note2.setCreated(LocalDate.now());
 		note2.setDue(LocalDate.now());
 		note2.setHeadline("test2");
@@ -111,41 +112,32 @@ public class StartupBean {
 		note2.setContent("TEST FOR NOTE2");
 		entityManager.persist(note2);
 		
-		/*
-		Permission edit = new Permission();
-		edit.setPermissionName("EDIT");
-		entityManager.persist(edit);
-		
-		Permission delete = new Permission();
-		delete.setPermissionName("DELETE");
-		entityManager.persist(delete);
+		Note note3 = new Note();
+		note3.setAuthorUser(user3);
+		note3.setAuthor(user3.getUsername());
+		note3.setCreated(LocalDate.now());
+		note3.setDue(LocalDate.now());
+		note3.setHeadline("test3");
+		note3.setLastEdited(LocalDate.now());
+		note3.setRelevance(Relevance.NORMAL);
+		note3.setContent("TEST FOR NOTE3");
+		entityManager.persist(note3);
 
-		Permission view = new Permission();
-		view.setPermissionName("VIEW");
-		entityManager.persist(view);
-		*/
-//		
-//		Set<Permission> adminPermissions = adminRole.getPermissions();
-//		adminPermissions.add(edit);
-//		adminPermissions.add(delete);
-//		adminPermissions.add(view);
-//		
-//		adminRole.setPermissions(adminPermissions);
-//		entityManager.persist(adminPermissions);
-//		entityManager.persist(adminRole);
-//		
-		Set<Role> adminRoles = user1.getRoles();
-		adminRoles.add(adminRole);
-//		
-		user1.setRoles(adminRoles);
+		Set<Role> user1Roles = user1.getRoles();
+		user1Roles.add(adminRole);
+		user1.setRoles(user1Roles);
 		
-		Set<Role> userRoles = user2.getRoles();
-		userRoles.add(userRole);
+		Set<Role> user2Roles = user2.getRoles();
+		user2Roles.add(userRole);
+		user2.setRoles(user2Roles);
+		
+		Set<Role> user3Roles = user3.getRoles();
+		user3Roles.add(userRole);
+		user3.setRoles(user3Roles);
 		
 		Set<Note> userNotes = user1.getNotes();
 		userNotes.add(note1);
 		userNotes.add(note2);
-		//entityManager.merge(user1);
 	}
 	
 

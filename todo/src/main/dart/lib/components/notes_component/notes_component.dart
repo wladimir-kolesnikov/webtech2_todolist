@@ -139,7 +139,7 @@ class NotesComponent implements OnInit{
     errorMessage = "";
     formsTitle = "Edit Note";
   }
-
+    
   //Nach dem Drücken des entsprechenden Buttons wird seletktiere Note dem User übergeben der in dem Eingabefeld
   //eingetragen wurde, wenn so ein User mit dem  Username existiert
   Future sendToUser(String username) async {
@@ -147,8 +147,8 @@ class NotesComponent implements OnInit{
     int newUserID = user.id;
 
     await notesService.addNote(selectedNote, newUserID);
-
     notesService.deleteNote(selectedNote, userID);
+
     selectedNote = null;
     noteList =  await notesService.getNoteList(userID);
   }

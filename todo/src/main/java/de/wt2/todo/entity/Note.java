@@ -20,8 +20,10 @@ public class Note extends BaseEntity {
 
 	private static final long serialVersionUID = 3713677712268341918L;
 	
+	private String author;
+	
 	@JsonProperty(access = Access.WRITE_ONLY)
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="user_id")
     private User authorUser;	
 	
@@ -106,5 +108,13 @@ public class Note extends BaseEntity {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 }
