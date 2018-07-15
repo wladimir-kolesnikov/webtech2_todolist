@@ -35,7 +35,7 @@ class NotesComponent implements OnInit{
 
   //User ID des angemeldeten Users
   @Input()
-  int user;
+  User user;
 
   NotesComponent(this.notesService, this.userService);
 
